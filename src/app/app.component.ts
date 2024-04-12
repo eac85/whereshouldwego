@@ -12,7 +12,7 @@ export class AppComponent {
   title = 'whereshouldwego';
   tags: TagItem[] = [];
   filteredPlaces: any;
-  colorFilter: boolean = false;
+  colorFilter: boolean = true;
   
   constructor() {
     this.filteredPlaces = [...this.placesInPhiladelphia]; // Copy all places to filteredPlaces initially
@@ -25,7 +25,7 @@ export class AppComponent {
       activity: false,
       neighborhood: 'Old City',
       happyHour: true,
-      color: "white",
+      color: "#FCB68A",
     },
     {
       name: 'Angelo’s',
@@ -33,7 +33,7 @@ export class AppComponent {
       activity: false,
       neighborhood: 'Bella Vista',
       happyHour: true,
-      color: "white",
+      color: "FireBrick",
     },
     {
       name: 'Abar',
@@ -41,7 +41,7 @@ export class AppComponent {
       activity: false,
       neighborhood: 'Center City',
       happyHour: true,
-      color: "white",
+      color: "DimGray",
     },
     {
       name: 'Assembly',
@@ -49,7 +49,7 @@ export class AppComponent {
       activity: false,
       neighborhood: 'Logan Square',
       happyHour: true,
-      color: "white",
+      color: "pearl",
     },
     {
       name: 'Al Zhaytouna',
@@ -57,7 +57,7 @@ export class AppComponent {
       activity: false,
       neighborhood: 'West Philadelphia',
       happyHour: true,
-      color: "white",
+      color: "#8DCCEF",
     },
     {
       name: 'Bloomsday',
@@ -73,7 +73,7 @@ export class AppComponent {
       activity: true,
       neighborhood: 'Fishtown',
       happyHour: true,
-      color: "white",
+      color: "#8DCCEF",
     },
     {
       name: 'Bok Bar',
@@ -81,7 +81,7 @@ export class AppComponent {
       activity: false,
       neighborhood: 'South Philadelphia',
       happyHour: true,
-      color: "white",
+      color: "SeaShell",
     },
     {
       name: 'Bonchon',
@@ -89,7 +89,7 @@ export class AppComponent {
       activity: false,
       neighborhood: 'Center City',
       happyHour: true,
-     color: "white",
+     color: "#EDE2D5",
     },
     {
       name: 'Barcelona',
@@ -97,15 +97,15 @@ export class AppComponent {
       activity: false,
       neighborhood: 'East Passyunk',
       happyHour: true,
-     color: "white",
+     color: "#4A6C50",
     },
   {
     name: 'Banh Mi and Bottles',
     place: 'Inside',
     activity: false,
-    neighborhood: 'West Philadelphia',
+    neighborhood: 'Queen Village',
     happyHour: true,
-  color: "white"
+  color: "#6287C5"
   },
   {
     name: 'Bridget Foy’s',
@@ -113,15 +113,15 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Queen Village',
     happyHour: true,
-  color: "white"
+  color: "tomato"
   },
   {
-    name: 'Blind Bar',
+    name: 'Blind Barber',
     place: 'Inside',
     activity: false,
     neighborhood: 'Center City',
     happyHour: true,
-  color: "white"
+  color: "whitesmoke"
   },
   {
     name: 'Bukchon',
@@ -129,7 +129,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Center City',
     happyHour: true,
-  color: "white"
+  color: "#F8D293"
   },
   {
     name: 'Blue Corn',
@@ -137,7 +137,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Northern Liberties',
     happyHour: true,
-  color: "white"
+  color: "#BCDEEB"
   },
   {
     name: 'Bing Bing Dim Sum',
@@ -145,7 +145,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'East Passyunk',
     happyHour: true,
-  color: "white"
+  color: "steelblue"
   },
   {
     name: 'Ba Le',
@@ -153,7 +153,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Chinatown',
     happyHour: true,
-  color: "white"
+  color: "#977692"
   },
   {
     name: 'Crunch Chicken',
@@ -161,7 +161,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Center City',
     happyHour: true,
-  color: "white"
+  color: "#E8BB6F"
   },
   {
     name: 'Cheu',
@@ -169,7 +169,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Fishtown',
     happyHour: true,
-  color: "white"
+  color: "#F4C443"
   },
   {
     name: 'Cartesian',
@@ -177,7 +177,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'East Passyunk',
     happyHour: true,
-  color: "white"
+  color: "brown"
   },
   {
     name: 'Cherry Street Pier',
@@ -196,12 +196,12 @@ export class AppComponent {
     color: "#9ACD32"
   },
   {
-    name: 'Cavs',
+    name: 'Cavanaugh`s',
     place: 'Inside',
     activity: false,
-    neighborhood: 'Various Locations',
+    neighborhood: 'Society Hill',
     happyHour: true,
-  color: "white"
+  color: "#F59985"
   },
   {
     name: 'Cosmis',
@@ -209,7 +209,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'West Philadelphia',
     happyHour: true,
-   color: "white"
+   color: "navy"
   },
   {
     name: 'Circles',
@@ -217,7 +217,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Northern Liberties',
     happyHour: true,
-   color: "white"
+   color: "orange"
   },
   {
     name: 'Cafe le Maude',
@@ -225,7 +225,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Northern Liberties',
     happyHour: true,
-   color: "white"
+   color: "black"
   },
   {
     name: 'Chinatown Beer Garden',
@@ -233,7 +233,7 @@ export class AppComponent {
     activity: true,
     neighborhood: 'Chinatown',
     happyHour: true,
-   color: "white"
+   color: "#E85636"
   },
   {
     name: 'Dizengoff',
@@ -241,7 +241,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Center City',
     happyHour: true,
-   color: "white"
+   color: "#E64F99"
   },
   {
     name: 'Dig',
@@ -249,7 +249,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Queen Village',
     happyHour: true,
-     color: "white"
+     color: "YellowGreen"
   },
   {
     name: 'Double Knot',
@@ -257,7 +257,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'washington square west',
     happyHour: true,
-     color: "white"
+     color: "#FBEFD8"
   },
   {
     name: 'Dandelion',
@@ -265,7 +265,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Center City Square',
     happyHour: true,
-   color: "white"
+   color: "LightGoldenrodYellow"
   },
   {
     name: 'Dim Sum Garden',
@@ -273,7 +273,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Chinatown',
     happyHour: true,
-     color: "white"
+     color: "#F34615"
   },
   {
     name: 'Don Chuchos',
@@ -289,7 +289,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Fishtown',
     happyHour: true,
-   color: "white"
+   color: "#BBDAB1"
   },
   {
     name: 'Emmy Squared',
@@ -297,7 +297,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Queen Village',
     happyHour: true,
-   color: "white"
+   color: "#F5A0BB"
   },
   {
     name: 'El Bar',
@@ -305,7 +305,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Northern Liberties',
     happyHour: true,
-   color: "white"
+   color: "#AAA9AA"
   },
   {
     name: 'El Techo',
@@ -313,7 +313,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'University City',
     happyHour: true,
-   color: "white"
+   color: "#FFC300"
   },
   {
     name: 'Frankford Hall',
@@ -329,7 +329,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Fishtown',
     happyHour: true,
-   color: "white"
+   color: "#077918"
   },
   {
     name: 'Federal Donuts',
@@ -337,7 +337,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Center City',
     happyHour: true,
-   color: "white"
+   color: "#E84235"
   },
   {
     name: 'Franky Bradley’s',
@@ -345,7 +345,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'washington square west',
     happyHour: true,
-     color: "white"
+     color: "#E1E5CE"
   },
   {
     name: 'Garage',
@@ -353,7 +353,7 @@ export class AppComponent {
     activity: true,
     neighborhood: 'Fishtown',
     happyHour: true,
-     color: "white"
+     color: "#E0FF5B"
   },
   {
     name: 'Garage',
@@ -361,7 +361,7 @@ export class AppComponent {
     activity: true,
     neighborhood: 'South Philly',
     happyHour: true,
-     color: "white"
+     color: "#7B940F"
   },
   {
     name: 'South Bowl',
@@ -369,7 +369,7 @@ export class AppComponent {
     activity: true,
     neighborhood: 'South Philly',
     happyHour: true,
-     color: "white"
+     color: "#62677F"
   },
   {
     name: 'Fitzwater Cafe',
@@ -377,7 +377,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Bella Vista',
     happyHour: true,
-     color: "white"
+     color: "#B7D6EE"
   },
   {
     name: 'Fourth Street Deli',
@@ -385,7 +385,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Queen Village',
     happyHour: true,
-   color: "white"
+   color: "#92D9BA"
   },
   {
     name: 'Fountain Porter',
@@ -393,7 +393,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'East Passyunk',
     happyHour: true,
-   color: "white"
+   color: "#9DD992"
   },
   {
     name: 'Goldie',
@@ -401,7 +401,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Center City',
     happyHour: true,
-   color: "white"
+   color: "#F4ED65"
   },
   {
     name: 'Graffiti Bar',
@@ -409,7 +409,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'washington square west',
     happyHour: true,
-     color: "white"
+     color: "#47AD52"
   },
   {
     name: 'Giorgios',
@@ -417,7 +417,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Bella Vista',
     happyHour: true,
-     color: "white"
+     color: "#D64432"
   },
   {
     name: 'Harp and Crown',
@@ -425,7 +425,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Center City',
     happyHour: true,
-     color: "white"
+     color: "#F0C76D"
   },
   {
     name: 'Hale and True',
@@ -433,7 +433,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Bella Vista',
     happyHour: true,
-     color: "#FFA07A"
+     color: "#FFB847"
   },
   {
     name: 'The Halal Guys',
@@ -441,7 +441,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'University City',
     happyHour: true,
-   color: "white"
+   color: "#BFBDBB"
   },
   {
     name: 'Happy Rooster',
@@ -449,7 +449,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Fishtown',
     happyHour: true,
-   color: "white"
+   color: "#FAD7CE"
   },
   {
     name: 'Isgro',
@@ -465,7 +465,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'South Philly',
     happyHour: true,
-   color: "white"
+   color: "#F0FACE"
   },
   {
     name: 'Jaxx Beer Boutique',
@@ -473,7 +473,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Queen Village',
     happyHour: true,
-     color: "white"
+     color: "#9F1F16"
   },
   {
     name: 'Johnny Brenda’s',
@@ -481,7 +481,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Fishtown',
     happyHour: true,
-    color: "white"
+    color: "#F1E49C"
   },
   {
     name: 'Kalaya',
@@ -489,7 +489,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Fishtown',
     happyHour: true,
-    color: "white",
+    color: "#EBA53A",
   },
   {
     name: 'Laser Wolf',
@@ -497,7 +497,7 @@ export class AppComponent {
     activity: false,
     neighborhood: 'Fishtown',
     happyHour: true,
-    color: "white",
+    color: "#DDA5F5",
   },
   {
     name: "The Love",
@@ -505,7 +505,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Center City",
     happyHour: true,
-     color: "white"
+     color: "#0E5C9E"
   },
   {
     name: "Le Caveau",
@@ -513,7 +513,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Bella Vista",
     happyHour: true,
-     color: "white"
+     color: "#DE9BAD"
   },
   {
     name: "Locust Rendezvous",
@@ -521,7 +521,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Washington Square West",
     happyHour: true,
-     color: "white"
+     color: "#E41952"
   },
   {
     name: "Lazeez",
@@ -529,7 +529,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Bella Vista",
     happyHour: false,
-     color: "white"
+     color: "#FEB43F"
   },
   {
     name: "Love Potion",
@@ -545,7 +545,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Washington Square West",
     happyHour: true,
-    color: "white"
+    color: "#F4EBEB"
   },
   {
     name: "Parc",
@@ -553,7 +553,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Center City",
     happyHour: true,
-    color: "white"
+    color: "#167623"
   },
   {
     name: "LMNO",
@@ -577,7 +577,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Fishtown",
     happyHour: true,
-     color: "white"
+     color: "#F5F063"
   },
   {
     name: "Middle Child",
@@ -585,7 +585,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Fishtown",
     happyHour: true,
-     color: "white"
+     color: "#115E1C"
   },
   {
     name: "Merkaz",
@@ -593,7 +593,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "University City",
     happyHour: true,
-     color: "white"
+     color: "#A02111"
   },
   {
     name: "Mission Taqueria",
@@ -601,7 +601,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Center City",
     happyHour: true,
-     color: "white"
+     color: "#F4EBEB"
   },
   {
     name: "McGillan's",
@@ -609,7 +609,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "washington square west",
     happyHour: true,
-     color: "white"
+     color: "#AC918D"
   },
   {
     name: "Masala Kitchen",
@@ -617,7 +617,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Graduate Hospital",
     happyHour: true,
-     color: "white"
+     color: "#F35A60"
   },
   {
     name: "Nunu",
@@ -625,7 +625,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "washington square west",
     happyHour: true,
-     color: "white"
+     color: "steelblue"
   },
   {
     name: "New Wave Cafe",
@@ -641,7 +641,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Queen Village",
     happyHour: true,
-     color: "white"
+     color: "sandybrown"
   },
   {
     name: "Mish Mish",
@@ -657,7 +657,7 @@ export class AppComponent {
     activity: false,
     neighborhood: "Washington Square West",
     happyHour: true,
-    color: "white"
+    color: "cornflowerblue"
   },
   {
     name: "Oyster Bar",
@@ -700,6 +700,15 @@ export class AppComponent {
 
   colorFilterToggle() {
     this.colorFilter = !this.colorFilter;
+  }
+
+  shuffleTags(){
+    let newTag: TagItem = { display: 'Queen Village', value: 'queen village' };
+    let activity: TagItem = { display:  'activity', value: 'activity' };
+
+    this.tags.push(newTag);
+    this.tags.push(activity);
+
   }
   
   
