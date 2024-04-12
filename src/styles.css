@@ -30,35 +30,36 @@ body {
     align-items: center;
     text-align: center;
     border-radius: 8px; /* Adjust the border radius for rounded corners */
+    position: relative;
   }
   
   /* Optional: Adjust font size for smaller grid items */
   .name-grid li {
     font-size: 16px; /* Adjust font size as needed */
   }
-
-  .message-bubble {
-    background-color: #007bff; /* Blue background color */
-    color: "white"; /* Text color */
-    border-radius: 20px; /* Rounded corners */
-    padding: 10px 15px; /* Padding inside the bubble */
-    max-width: 70%; /* Maximum width of the bubble */
-    margin: 10px; /* Margin around the bubble */
+ 
+  .sticky-icon {
+    position:absolute;
+    top: 5px; /* Adjust top position */
+    right: 5px; /* Adjust right position */
+    color: black; /* Icon color */
+    /*padding: 10px;*/
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition for tilt effect */
   }
 
-  .message-bubble p {
-    margin: 0; /* Remove default paragraph margin */
+  .sticky-icon:hover {
+    transform: rotate(10deg);
   }
-
-  .message-bubble .tail {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 10px 10px 0 0; /* Adjust triangle size */
-    border-color: #007bff transparent transparent transparent; /* Blue color for triangle */
-    bottom: -10px; /* Position the tail at the bottom of the bubble */
-    left: 20px; /* Adjust left position of the tail */
-  }
-
   
+  .color-filter {
+    font-size:30px;
+    position:absolute;
+    top: 5px; /* Adjust top position */
+    right: 5px; /* Adjust right position */
+    color: gray; /* Icon color */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition for tilt effect */
+  }

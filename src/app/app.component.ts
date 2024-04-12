@@ -12,6 +12,7 @@ export class AppComponent {
   title = 'whereshouldwego';
   tags: TagItem[] = [];
   filteredPlaces: any;
+  colorFilter: boolean = false;
   
   constructor() {
     this.filteredPlaces = [...this.placesInPhiladelphia]; // Copy all places to filteredPlaces initially
@@ -695,6 +696,10 @@ export class AppComponent {
   
       return meetsCriteria;
     });
+  }
+
+  colorFilterToggle() {
+    this.colorFilter = !this.colorFilter;
   }
   
   

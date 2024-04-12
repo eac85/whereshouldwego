@@ -1,9 +1,17 @@
 <h2> where should we go? </h2>
+<span class="color-filter"> <i [style.color]="colorFilter ? 'red' : 'gray'"(click)="colorFilterToggle()" class="fa-solid fa-rainbow"></i> </span>
 <tag-input [(ngModel)]="tags" (ngModelChange)="filterPlaces()"></tag-input>
 
 <ul class="name-grid">
-  <li *ngFor="let place of filteredPlaces" style="background-color: {{ place.color}} ">
-    {{ place.name }} 
+  <li *ngFor="let place of filteredPlaces" [style.background-color]="colorFilter ? place.color : 'white'">
+    <div class="sticky-icon">
+      <i  *ngIf="place.activity" class="fas fa-bowling-ball"></i> <!-- Font Awesome star icon -->
+      <i  *ngIf="place.happyHour" class="fas fa-glass-martini"></i> <!-- Font Awesome star icon -->
+    </div>
+    <div>
+   <span style="font-size:medium">{{ place.name }} </span> <br>
+   <span style="font-size:small">{{ place.neighborhood }} </span>
+  </div>
   </li>
 </ul>
 
