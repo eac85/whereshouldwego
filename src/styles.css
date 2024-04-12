@@ -1,1 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+body {
+    background-color: #f4f3f2;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+[_nghost-ng-c2984615029] {
+    background-color: lightsteelblue; /* Set your desired background color here */
+}
+
+.ng2-tag-input__text-input[_ngcontent-ng-c1148831952] {
+    background-color: transparent;
+}
+
+.name-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the column width as needed */
+    gap: 15px; /* Adjust the gap between grid items */
+    list-style: none; /* Remove default list styles */
+  }
+ 
+.name-grid li {
+    background-color: #e6d7ff; /* Background color of grid items */
+    padding: 1px; /* Padding around grid items */
+    aspect-ratio: 1; /* Ensure perfect square aspect ratio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 8px; /* Adjust the border radius for rounded corners */
+  }
+  
+  /* Optional: Adjust font size for smaller grid items */
+  .name-grid li {
+    font-size: 16px; /* Adjust font size as needed */
+  }
+
+  .message-bubble {
+    background-color: #007bff; /* Blue background color */
+    color: "white"; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the bubble */
+    max-width: 70%; /* Maximum width of the bubble */
+    margin: 10px; /* Margin around the bubble */
+  }
+
+  .message-bubble p {
+    margin: 0; /* Remove default paragraph margin */
+  }
+
+  .message-bubble .tail {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 0; /* Adjust triangle size */
+    border-color: #007bff transparent transparent transparent; /* Blue color for triangle */
+    bottom: -10px; /* Position the tail at the bottom of the bubble */
+    left: 20px; /* Adjust left position of the tail */
+  }
+
+  
