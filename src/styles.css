@@ -4,6 +4,7 @@
 body {
     background-color: #f4f3f2;
     font-family: 'Noto Sans', sans-serif;
+    margin: 20px;
 }
 
 [_nghost-ng-c2984615029] {
@@ -68,4 +69,4 @@ body {
 
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 20; font-family: Roboto, "Helvetica Neue", sans-serif; }

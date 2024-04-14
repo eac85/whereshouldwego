@@ -56,7 +56,7 @@ export class AppComponent {
   surpriseMe() {
     this.chips = [];
     const randomTags = this.getRandomItemsFromCategories(this.placesInPhiladelphia);
-    this.chips.push(randomTags.neighborhood);
+    this.chips.push(randomTags.neighborhood.toLowerCase());
     if(randomTags.activity){
       this.chips.push('activity');
     }

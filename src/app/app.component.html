@@ -11,7 +11,7 @@
             {{ chip }}
             <mat-icon matChipRemove (click)="removeChip(chip)"> <i  class="fas fa-times"></i></mat-icon>
           </mat-chip>
-          <input #chipInput matInput [matAutocomplete]="auto"
+          <input #chipInput matInput [matAutocomplete]="auto" id="myInput" 
           [matChipInputFor]="chipGrid" (keydown.enter)="addChip(chipInput.value); chipInput.value=''; filterPlaces()" (keydown.backspace)="removeLastChip()">
           <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addChip($event.option.viewValue); chipInput.value=''; filterPlaces()">
             <mat-option *ngFor="let option of autocompleteOptions" [value]="option">{{ option }}</mat-option>
@@ -20,7 +20,7 @@
     </mat-form-field>
     </div>
     <div class="col-md-2">
-      <button class="cool-button"mat-raised-button color="primary" (click)="surpriseMe()">Surprise me <i  class="fas fa-dice"></i></button>
+      <button class="cool-button"mat-raised-button color="primary" (click)="surpriseMe()"> feeling brave <i  class="fas fa-dice"></i></button>
     </div>
   </div>
 </div>
