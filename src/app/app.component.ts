@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
-import { TagItem } from './types';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { TagItem, Item } from './types';
+import { FormControl } from '@angular/forms';
+import {MatAutocompleteSelectedEvent, MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 
 
@@ -13,12 +16,76 @@ export class AppComponent {
   tags: TagItem[] = [];
   filteredPlaces: any;
   colorFilter: boolean = true;
-  
+  autocompleteOptions: string[] = ['queen village', 'west philadelphia', 'bella vista', 'south philly', 'fairmount', 'fishtown', 'northern liberties',
+  'university city', 'washington square west', 'center city', 'chinatown', 'center city', 'old city', 'east passyunk', 'chinatown',
+  'south philadelphia', 'activity', 'outside', 'happy hour'];
+
   constructor() {
     this.filteredPlaces = [...this.placesInPhiladelphia]; // Copy all places to filteredPlaces initially
   }
+
+  chipInput = new FormControl();
+  chips: string[] = [];
+  placesinPhiladelphia: Item[] = [];
+
+  addChip(value: string): void {
+    const trimmedValue = value.trim();
+    if (trimmedValue && !this.chips.includes(trimmedValue)) {
+      this.chips.push(trimmedValue);
+    }
+  }
+  removeChip(chip: string): void {
+    const index = this.chips.indexOf(chip);
+    if (index >= 0) {
+      this.chips.splice(index, 1);
+    }
+    this.filterPlaces();
+  }
+
+  removeLastChip(): void {
+    if (this.chips.length > 0) {
+      this.chips.pop(); // Remove the last chip
+    }
+    this.filterPlaces();
+  }
+
+  selected(input: string): void {
+    this.chips.push(input);
+  }
+
+  surpriseMe() {
+    this.chips = [];
+    const randomTags = this.getRandomItemsFromCategories(this.placesInPhiladelphia);
+    this.chips.push(randomTags.neighborhood);
+    if(randomTags.activity){
+      this.chips.push('activity');
+    }
+    if(randomTags.happyHour){
+      this.chips.push('happy hour');
+    }
+    this.filterPlaces();
+  }
+
+  getRandomItem<T>(array: T[]): T {
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
+  }
+
+  getRandomItemsFromCategories(items: Item[]): { name: string, place: string, activity: boolean, happyHour: boolean, neighborhood: string } {
+    const locationItems = items.filter(item => item.place !== undefined); // Filter items by location
+    const activityItems = items.filter(item => item.activity !== undefined); // Filter items by activity
+    const happyHourItems = items.filter(item => item.happyHour !== undefined); // Filter items by happy hour
+    const neighborhoods = items.filter(item => item.neighborhood !== undefined); // Filter items by happy hour
+
+    const randomLocation = this.getRandomItem(locationItems);
+    const randomActivity = this.getRandomItem(activityItems);
+    const randomHappyHour = this.getRandomItem(happyHourItems);
+    const randomNeighborhood = this.getRandomItem(neighborhoods);
+
+    return { name: randomLocation.name, place: randomLocation.place, activity: randomActivity.activity, happyHour: randomHappyHour.happyHour, neighborhood: randomNeighborhood.neighborhood };
+  }
   
-  placesInPhiladelphia = [
+  placesInPhiladelphia: Item[] = [
     {
       name: 'Amada',
       place: 'Inside',
@@ -92,7 +159,7 @@ export class AppComponent {
      color: "#EDE2D5",
     },
     {
-      name: 'Barcelona',
+      name: 'Barcelona Bar',
       place: 'Inside',
       activity: false,
       neighborhood: 'East Passyunk',
@@ -182,7 +249,7 @@ export class AppComponent {
   {
     name: 'Cherry Street Pier',
     place: 'Outside',
-    activity: 'Various',
+    activity: true,
     neighborhood: 'Old City',
     happyHour: true,
     color: "#D2042D"
@@ -670,34 +737,34 @@ export class AppComponent {
     // Add more places here
   ];
   
+
   filterPlaces() {
     this.filteredPlaces = this.placesInPhiladelphia.filter(place => {
-      const searchText = this.tags.map(tag => tag.display.toLowerCase()).join(' ');
+      const searchText = this.chips.map(chip => chip.toLowerCase()).join(' ');
   
       // Check if all required tags are present
-      const hasHappyHourTag = this.tags.some(tag => tag.display.toLowerCase() === 'happy hour');
-      const hasActivityTag = this.tags.some(tag => tag.display.toLowerCase() === 'activity');
-      const location = this.tags.find(tag =>
-        ['outside', 'inside'].includes(tag.display.toLowerCase())
+      const hasHappyHourTag = this.chips.some(chip => chip.toLowerCase() === 'happy hour');
+      const hasActivityTag = this.chips.some(chip => chip.toLowerCase() === 'activity');
+      const location = this.chips.find(chip =>
+        ['outside', 'inside'].includes(chip.toLowerCase())
       );
-      const selectedNeighborhood = this.tags.find(tag =>
+      const selectedNeighborhood = this.chips.find(chip =>
         ['queen village', 'west philadelphia', 'bella vista', 'south philly', 'fairmount', 'fishtown', 'northern liberties',
           'university city', 'washington square west', 'center city', 'chinatown', 'center city', 'old city', 'east passyunk', 'chinatown',
           'south philadelphia'
-        ].includes(tag.display.toLowerCase())
+        ].includes(chip.toLowerCase())
       );
   
       // Check if the place meets all tag criteria
       const meetsCriteria =
         (!hasHappyHourTag || place.happyHour) &&
         (!hasActivityTag || place.activity) &&
-        (!location || place.place.toLowerCase() === location.display.toLowerCase()) &&
-        (!selectedNeighborhood || place.neighborhood.toLowerCase() === selectedNeighborhood.display.toLowerCase());
+        (!location || place.place.toLowerCase() === location.toLowerCase()) &&
+        (!selectedNeighborhood || place.neighborhood.toLowerCase() === selectedNeighborhood.toLowerCase());
   
       return meetsCriteria;
     });
   }
-
   colorFilterToggle() {
     this.colorFilter = !this.colorFilter;
   }
@@ -710,6 +777,8 @@ export class AppComponent {
     this.tags.push(activity);
 
   }
+
+ 
   
   
 }

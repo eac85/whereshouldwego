@@ -1,7 +1,29 @@
 <h2> where should we go? </h2>
 <span class="color-filter"> <i [style.color]="colorFilter ? 'salmon' : 'gray'"(click)="colorFilterToggle()" class="fa-solid fa-rainbow"></i> </span>
-<tag-input [(ngModel)]="tags" (ngModelChange)="filterPlaces()">
-</tag-input>
+
+
+<div class="container" style="width: 100%;">
+  <div class="row">
+    <div class="col-md-10">
+    <mat-form-field class="chip-list">
+      <mat-chip-grid #chipGrid>
+          <mat-chip *ngFor="let chip of chips" (removed)="removeChip(chip)">
+            {{ chip }}
+            <mat-icon matChipRemove (click)="removeChip(chip)"> <i  class="fas fa-times"></i></mat-icon>
+          </mat-chip>
+          <input #chipInput matInput [matAutocomplete]="auto"
+          [matChipInputFor]="chipGrid" (keydown.enter)="addChip(chipInput.value); chipInput.value=''; filterPlaces()" (keydown.backspace)="removeLastChip()">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addChip($event.option.viewValue); chipInput.value=''; filterPlaces()">
+            <mat-option *ngFor="let option of autocompleteOptions" [value]="option">{{ option }}</mat-option>
+          </mat-autocomplete>
+      </mat-chip-grid>
+    </mat-form-field>
+    </div>
+    <div class="col-md-2">
+      <button class="cool-button"mat-raised-button color="primary" (click)="surpriseMe()">Surprise me <i  class="fas fa-dice"></i></button>
+    </div>
+  </div>
+</div>
 
 <ul class="name-grid">
   <li *ngFor="let place of filteredPlaces" [style.background-color]="colorFilter ? place.color : 'white'">
@@ -15,4 +37,3 @@
   </div>
   </li>
 </ul>
-
