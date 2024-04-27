@@ -10,4 +10,6 @@ export type Item = {
     neighborhood: string;
     happyHour: boolean;
     color: string;
+    dogFriendly?: boolean;
+    cuisine?: string;
   };
