@@ -17,7 +17,7 @@ body {
 
 .name-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust the column width as needed */
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Adjust the column width as needed */
     gap: 15px; /* Adjust the gap between grid items */
     list-style: none; /* Remove default list styles */
   }

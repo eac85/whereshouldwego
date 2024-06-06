@@ -195,6 +195,7 @@ import { Item } from './types';
     color: "#9ACD32",
     cuisine: "Cuban"
   },
+  //name, outside, activity, neighborhood, happy_hour, color, cuisine
   {
     name: 'Cavanaugh`s',
     place: 'Inside',

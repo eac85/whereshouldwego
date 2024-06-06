@@ -4,14 +4,14 @@ body {
 
 .chip-list {
     width: 100%;
+    font-size: 8px;
 }
 
 .cool-button {
-    display: inline-block;
     border: none;
     padding: 20px;
     background-color: rgb(201, 201, 197); /* Your desired background color */
-    border-radius: 10%;
+    border-radius: 8%;
     color: black; /* Text color */
     font-size: 16px; /* Adjust font size as needed */
     cursor: pointer;
@@ -29,4 +29,14 @@ body {
 
   #myInput:focus {
     background-color: transparent;
+  }
+
+  .row.align-items-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .full-width {
+    width: 100%;
+    text-align: center;
   }

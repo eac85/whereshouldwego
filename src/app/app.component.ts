@@ -1,8 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { TagItem, Item } from './types';
+import { TagItem, Item, Place, Neighborhood, Cuisine } from './types';
 import { FormControl } from '@angular/forms';
 import { placesInPhiladelphia } from './places';
-
+import { SupabaseService } from './services/supabase.service';
+import { Observable, of } from 'rxjs';
+import { filter, map , switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -16,29 +18,38 @@ export class AppComponent {
   tags: TagItem[] = [];
   filteredPlaces: any;
   colorFilter: boolean = true;
-  autocompleteOptions: string[] = ['queen village', 'west philadelphia', 'bella vista', 'south philly', 'fairmount', 'fishtown', 'northern liberties',
-  'university city', 'washington square west', 'center city', 'chinatown', 'center city', 'old city', 'east passyunk', 'chinatown',
-  'south philadelphia', 'activity', 'outside', 'happy hour',  "french", "dog friendly", "chinese",
-  "pizza",
-  "american",
-  "vietnamese",
-  "board game cafe",
-  "mexican",
-  "japanese",
-  "cocktails",
-  "seafood",
-  "diner",
-  "asian fusion",
-  "wine & cheese",
-  "korean",
-  "new american",
-  "whiskey bar",
-  "italian",
-  "bar & grill",
-  "malaysian"];
+  allPlacesData$: Observable<any>;
+  filteredPlacesData$: Observable<any>;
+  cuisines: Cuisine[] = [];
+  cuisineNames: string[] = [];
 
-  constructor() {
+  neighborhoods: Neighborhood[] = [];
+  neighborhoodNames: string[] = [];
+
+  autocompleteOptions: string[] = [];
+
+   constructor(private readonly supabase: SupabaseService) {
     this.filteredPlaces = [...placesInPhiladelphia]; // Copy all places to filteredPlaces initially
+    this.allPlacesData$ = this.supabase.getPlaces1();
+    this.filteredPlacesData$ = this.filterPlaces();
+    this.cuisineHandler();
+    this.neighborhoodHandler();
+  }
+
+  async cuisineHandler() {
+    this.cuisines = await this.supabase.getCuisine();
+    this.cuisineNames = this.cuisines.map(cuisine => cuisine.name);
+  }
+
+  async neighborhoodHandler() {
+    this.neighborhoods = await this.supabase.getCuisine();
+    this.neighborhoodNames = this.neighborhoods.map(neighborhood => neighborhood.name);
+    this.autocompleteOptions = await ['activity',
+    'outside',
+    'happy hour',
+    'dog friendly',
+    ...this.neighborhoodNames,
+    ...this.cuisineNames];
   }
 
   chipInput = new FormControl();
@@ -106,65 +117,49 @@ export class AppComponent {
     return { name: randomLocation.name, place: randomLocation.place, activity: randomActivity.activity, happyHour: randomHappyHour.happyHour, neighborhood: randomNeighborhood.neighborhood, cuisine: randomCuisine.cuisine };
   }
   
- 
-  
+  getFilteredPlaces(places: any[]): Observable<any[]> {
+    const searchText = this.chips.map(chip => chip.toLowerCase()).join(' ');
 
-  filterPlaces() {
-    this.filteredPlaces = placesInPhiladelphia.filter(place => {
-      const searchText = this.chips.map(chip => chip.toLowerCase()).join(' ');
-  
-      // Check if all required tags are present
-      const hasHappyHourTag = this.chips.some(chip => chip.toLowerCase() === 'happy hour');
-      const hasDogFriendlyTag = this.chips.some(chip => chip.toLowerCase() === 'dog friendly');
-      const hasActivityTag = this.chips.some(chip => chip.toLowerCase() === 'activity');
-      const location = this.chips.find(chip =>
-        ['outside', 'inside'].includes(chip.toLowerCase())
-      );
-      const hasCuisine = this.chips.find(chip => [
-        "french",
-        "pizza",
-        "american",
-        "vietnamese",
-        "board game cafe",
-        "mexican",
-        "japanese",
-        "cocktails",
-        "seafood",
-        "diner",
-        "asian",
-        "wine & cheese",
-        "korean",
-        "new american",
-        "whiskey bar",
-        "italian",
-        "bar & grill",
-        "malaysian",
-        "spanish",
-        "thai",
-        "cuban",
-        "chinese",
-        "middle eastern"
-      ].includes(chip.toLowerCase()));
-      
-      const selectedNeighborhood = this.chips.find(chip =>
-        ['queen village', 'west philadelphia', 'bella vista', 'south philly', 'fairmount', 'fishtown', 'northern liberties',
-          'university city', 'washington square west', 'center city', 'chinatown', 'center city', 'old city', 'east passyunk', 'chinatown',
-          'south philadelphia', 'society hill', 'graduate hospital', 'rittenhouse', 'south street', 'logan square'
-        ].includes(chip.toLowerCase())
-      );
-  
+    const hasHappyHourTag = this.chips.some(chip => chip.toLowerCase() === 'happy hour');
+    const hasDogFriendlyTag = this.chips.some(chip => chip.toLowerCase() === 'dog friendly');
+    const hasActivityTag = this.chips.some(chip => chip.toLowerCase() === 'activity');
+    const location = this.chips.find(chip =>
+      ['outside', 'inside'].includes(chip.toLowerCase())
+    );
+    const hasCuisine = this.chips.find(chip => [
+      "french", "pizza", "american", "vietnamese", "board game cafe", "mexican",
+      "japanese", "cocktails", "seafood", "diner", "asian", "wine & cheese",
+      "korean", "new american", "whiskey bar", "italian", "bar & grill",
+      "malaysian", "spanish", "thai", "cuban", "chinese", "middle eastern"
+    ].includes(chip.toLowerCase()));
+
+    const selectedNeighborhood = this.chips.find(chip =>
+      ['queen village', 'west philadelphia', 'bella vista', 'south philly', 'fairmount', 'fishtown', 'northern liberties',
+        'university city', 'washington square west', 'center city', 'chinatown', 'center city', 'old city', 'east passyunk', 'chinatown',
+        'south philadelphia', 'society hill', 'graduate hospital', 'rittenhouse', 'south street', 'logan square'
+      ].includes(chip.toLowerCase())
+    );
+    return of(places.filter(place => {
       // Check if the place meets all tag criteria
       const meetsCriteria =
-        (!hasHappyHourTag || place.happyHour) &&
+        (!hasHappyHourTag || place.happy_hour) &&
         (!hasActivityTag || place.activity) &&
-        (!hasDogFriendlyTag || place.dogFriendly) &&
-        (!location || place.place.toLowerCase() === location.toLowerCase()) &&
-        (!selectedNeighborhood || place.neighborhood.toLowerCase() === selectedNeighborhood.toLowerCase()) &&
-        (!hasCuisine || (place.cuisine == undefined ? false : place.cuisine.toLowerCase() === hasCuisine.toLowerCase()));
-  
+        (!hasDogFriendlyTag || place.dog_friendly) &&
+        (!location || place.location.toLowerCase() === location.toLowerCase()) &&
+        (!selectedNeighborhood || place.neighborhood.name.toLowerCase() === selectedNeighborhood.toLowerCase()) &&
+        (!hasCuisine || (place.cuisine == undefined ? false : place.cuisine.name.toLowerCase() === hasCuisine.toLowerCase()));
+
       return meetsCriteria;
-    });
+    }));
   }
+
+  // Call this method whenever the chips change
+  filterPlaces() {
+    return this.filteredPlacesData$ = this.allPlacesData$.pipe(
+      switchMap(places => this.getFilteredPlaces(places))
+    );
+  }
+
   colorFilterToggle() {
     this.colorFilter = !this.colorFilter;
   }

@@ -1,10 +1,9 @@
 <h2> where should we go? </h2>
 <span class="color-filter"> <i [style.color]="colorFilter ? 'salmon' : 'gray'"(click)="colorFilterToggle()" class="fa-solid fa-rainbow"></i> </span>
 
-
 <div class="container" style="width: 100%;">
-  <div class="row">
-    <div class="col-md-10">
+  <div class="row align-items-center">
+    <div class="col-md-8">
     <mat-form-field class="chip-list">
       <mat-chip-grid #chipGrid>
           <mat-chip *ngFor="let chip of chips" (removed)="removeChip(chip)">
@@ -19,21 +18,22 @@
       </mat-chip-grid>
     </mat-form-field>
     </div>
-    <div class="col-md-2">
-      <button class="cool-button"mat-raised-button color="primary" (click)="surpriseMe()"> feeling brave <i  class="fas fa-dice"></i></button>
+    <div class="col-md-2 full-width">
+      <button class="cool-button"mat-raised-button color="primary" (click)="surpriseMe()">  <i  class="fas fa-dice"></i></button>
     </div>
   </div>
 </div>
-
+<div *ngIf="filteredPlacesData$ | async as placesData" style="padding-top: 20px; text-align: center;">
 <ul class="name-grid">
-  <li *ngFor="let place of filteredPlaces" [style.background-color]="colorFilter ? place.color : 'white'">
+  <li *ngFor="let place of placesData" [style.background-color]="colorFilter ? place.color : 'white'">
     <div class="sticky-icon">
       <i  *ngIf="place.activity" class="fas fa-bowling-ball"></i> <!-- Font Awesome star icon -->
-      <i  *ngIf="place.happyHour" class="fas fa-glass-martini"></i> <!-- Font Awesome star icon -->
+      <i  *ngIf="place.happy_hour" class="fas fa-glass-martini"></i> <!-- Font Awesome star icon -->
     </div>
     <div>
    <span style="font-size:medium">{{ place.name }} </span> <br>
-   <span style="font-size:small">{{ place.neighborhood }} </span>
+   <span style="font-size:small">{{ place.neighborhood.name }} </span>
   </div>
   </li>
 </ul>
+</div>
