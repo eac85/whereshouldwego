@@ -17,8 +17,8 @@ body {
 
 .name-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); /* Adjust the column width as needed */
-    gap: 15px; /* Adjust the gap between grid items */
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Adjust the column width as needed */
+    gap: 10px; /* Adjust the gap between grid items */
     list-style: none; /* Remove default list styles */
   }
  
@@ -37,6 +37,10 @@ body {
   /* Optional: Adjust font size for smaller grid items */
   .name-grid li {
     font-size: 16px; /* Adjust font size as needed */
+  }
+
+  ul {
+    padding-inline-start: 0px;
   }
  
   .sticky-icon {

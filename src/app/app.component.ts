@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TagItem, Item, Place, Neighborhood, Cuisine } from './types';
 import { FormControl } from '@angular/forms';
 import { placesInPhiladelphia } from './places';
@@ -145,7 +145,7 @@ export class AppComponent {
         (!hasHappyHourTag || place.happy_hour) &&
         (!hasActivityTag || place.activity) &&
         (!hasDogFriendlyTag || place.dog_friendly) &&
-        (!location || place.location.toLowerCase() === location.toLowerCase()) &&
+        (!location || place.outdoor_seating) &&
         (!selectedNeighborhood || place.neighborhood.name.toLowerCase() === selectedNeighborhood.toLowerCase()) &&
         (!hasCuisine || (place.cuisine == undefined ? false : place.cuisine.name.toLowerCase() === hasCuisine.toLowerCase()));
 
