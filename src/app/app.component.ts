@@ -95,7 +95,6 @@ export class AppComponent {
       this.chips.push(randomTags.cuisine.toLowerCase());
     }
     this.filterPlaces();
-    if(this.filteredPlacesData$
   }
 
   getRandomItem<T>(array: T[]): T {
@@ -158,8 +157,7 @@ export class AppComponent {
   // Call this method whenever the chips change
   filterPlaces()  {
     return this.filteredPlacesData$ = this.allPlacesData$.pipe(
-      switchMap(places => this.getFilteredPlaces(places))
-      tap(filteredPlaces => this.filteredPlacesLength = filteredPlaces.length)
+      switchMap(places => this.getFilteredPlaces(places)),
 
     );
   }
