@@ -20,6 +20,7 @@ export class AppComponent {
   colorFilter: boolean = true;
   allPlacesData$: Observable<any>;
   filteredPlacesData$: Observable<any>;
+
   cuisines: Cuisine[] = [];
   cuisineNames: string[] = [];
 
@@ -94,6 +95,7 @@ export class AppComponent {
       this.chips.push(randomTags.cuisine.toLowerCase());
     }
     this.filterPlaces();
+    if(this.filteredPlacesData$
   }
 
   getRandomItem<T>(array: T[]): T {
@@ -154,15 +156,18 @@ export class AppComponent {
   }
 
   // Call this method whenever the chips change
-  filterPlaces() {
+  filterPlaces()  {
     return this.filteredPlacesData$ = this.allPlacesData$.pipe(
       switchMap(places => this.getFilteredPlaces(places))
+      tap(filteredPlaces => this.filteredPlacesLength = filteredPlaces.length)
+
     );
   }
 
   colorFilterToggle() {
     this.colorFilter = !this.colorFilter;
   }
+
 
   shuffleTags(){
     let newTag: TagItem = { display: 'Queen Village', value: 'queen village' };
@@ -173,7 +178,4 @@ export class AppComponent {
 
   }
 
- 
-  
-  
 }
