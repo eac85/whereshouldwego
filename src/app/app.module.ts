@@ -8,12 +8,14 @@ import { MatInputModule } from '@angular/material/input';
 import { AppComponent } from './app.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatAutocompleteModule } from '@angular/material/autocomplete'; // Import MatAutocompleteModule
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ModalComponent } from './modal/modal.component'; // Import MatAutocompleteModule
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

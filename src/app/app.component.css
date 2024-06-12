@@ -40,3 +40,23 @@ body {
     width: 100%;
     text-align: center;
   }
+
+  .footer {
+    color: gray;
+    text-align: center;
+    padding: 10px 0;
+    bottom: 0;
+    position:absolute;
+}
+
+.addTile {
+  font-size:x-large; 
+  background-color: lightgray; 
+  opacity: 60%; 
+  border: 5px darkgray;
+}
+
+.addTile:hover {
+  color: lightgray; 
+  background-color: gray; 
+}

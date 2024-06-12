@@ -5,6 +5,8 @@ import { placesInPhiladelphia } from './places';
 import { SupabaseService } from './services/supabase.service';
 import { Observable, of } from 'rxjs';
 import { filter, map , switchMap } from 'rxjs/operators';
+import { ModalService } from './services/modal.service';
+
 
 @Component({
   selector: 'app-root',
@@ -29,7 +31,7 @@ export class AppComponent {
 
   autocompleteOptions: string[] = [];
 
-   constructor(private readonly supabase: SupabaseService) {
+   constructor(private readonly supabase: SupabaseService, private modalService: ModalService) {
     this.filteredPlaces = [...placesInPhiladelphia]; // Copy all places to filteredPlaces initially
     this.allPlacesData$ = this.supabase.getPlaces1();
     this.filteredPlacesData$ = this.filterPlaces();
@@ -43,7 +45,7 @@ export class AppComponent {
   }
 
   async neighborhoodHandler() {
-    this.neighborhoods = await this.supabase.getCuisine();
+    this.neighborhoods = await this.supabase.getNeighborhoods();
     this.neighborhoodNames = this.neighborhoods.map(neighborhood => neighborhood.name);
     this.autocompleteOptions = await ['activity',
     'outside',
@@ -176,4 +178,11 @@ export class AppComponent {
 
   }
 
+  addPlace(){
+    alert(this.chips);
+  }
+
+  openModal() {
+    this.modalService.showModal(this.chips);
+  }
 }

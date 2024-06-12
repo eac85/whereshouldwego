@@ -2,7 +2,7 @@ import { createClient, SupabaseClient, PostgrestResponse } from '@supabase/supab
 import { environment } from 'src/environments/environment'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cuisine } from '../types';
+import { Cuisine, Neighborhood } from '../types';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +20,7 @@ export class SupabaseService {
         .from('place')
         .select(`outdoor_seating,activity,happy_hour,color,cuisine (id, name),dog_friendly,name,
         neighborhood (id, name)
-        `);
+        `).eq('status', 'A');
         return {data:place, error};
       }
 
@@ -38,7 +38,7 @@ export class SupabaseService {
             dog_friendly,
             name, 
             neighborhood (id, name) 
-           `)
+           `).eq('status', 'A')
             .then((response: PostgrestResponse<any>) => {
               if (response.error) {
                 observer.error(response.error.message);
@@ -50,11 +50,24 @@ export class SupabaseService {
         });
       }
 
-    async getNeighborhoods(){
-        let { data: Neighborhood, error } = await this.supabase
+    async savePlace(restaurant: any){
+        restaurant.status = 'P';
+        const { data, error } = await this.supabase.from('place').insert([restaurant]);
+        if (error) {
+            throw error;
+          }
+          return data;
+    }
+
+    async getNeighborhoods(): Promise<Neighborhood[]>{
+        let {data, error } = await this.supabase
         .from('neighborhood')
         .select(`id, name`);
-        return {data: Neighborhood , error};
+        if (error) {
+            console.error('Error fetching neighborhoods:', error);
+            return [];
+        }
+        return data as Neighborhood[];
     }
     async getCuisine(): Promise<Cuisine[]>{
         let { data, error } = await this.supabase

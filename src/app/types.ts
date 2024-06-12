@@ -17,15 +17,15 @@ export type Item = {
 export type Place = {
     name: string;
     place: string;
-    outdoor: boolean;
-    activity: boolean;
+    outdoor?: boolean | null;
+    activity?: boolean | null;
     neighborhood: {
         id: number, 
         name: string;
     }
-    happy_hour: boolean;
+    happy_hour?: boolean;
     color: string;
-    dog_friendly?: boolean;
+    dog_friendly?: boolean | null;
     cuisine?: {
         id: number, 
         name: string;
