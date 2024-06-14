@@ -39,6 +39,7 @@ export class SupabaseService {
             name, 
             neighborhood (id, name) 
            `).eq('status', 'A')
+           .order('name', { ascending: true })
             .then((response: PostgrestResponse<any>) => {
               if (response.error) {
                 observer.error(response.error.message);
@@ -50,7 +51,7 @@ export class SupabaseService {
         });
       }
 
-    async savePlace(restaurant: any){
+    async savePlace(restaurant: any) {
         restaurant.status = 'P';
         const { data, error } = await this.supabase.from('place').insert([restaurant]);
         if (error) {
