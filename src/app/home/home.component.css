@@ -1,0 +1,62 @@
+body {
+    background-color: #F5EDDC;
+}
+
+.chip-list {
+    width: 100%;
+    font-size: 20px;
+}
+
+.cool-button {
+    border: none;
+    padding: 20px;
+    background-color: rgb(201, 201, 197); /* Your desired background color */
+    border-radius: 8%;
+    color: black; /* Text color */
+    font-size: 16px; /* Adjust font size as needed */
+    cursor: pointer;
+    outline: none; /* Remove default outline */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+    
+  #myInput {
+    background-color: transparent; /* Change the background color to a light gray */
+    color: #333333; /* Set text color */
+    border-bottom-color: #3d3c3c; /* Add a border for better visibility */
+    padding: 8px; /* Add padding for spacing inside the input */
+    border-radius: 4px; /* Optionally, add border-radius for rounded corners */
+  }
+
+  #myInput:focus {
+    background-color: transparent;
+  }
+
+  .row.align-items-center {
+    display: flex;
+    align-items: center;
+  }
+  
+  .full-width {
+    width: 100%;
+    text-align: center;
+  }
+
+  .footer {
+    color: gray;
+    text-align: center;
+    padding: 10px 0;
+    bottom: 0;
+    position:absolute;
+}
+
+.addTile {
+  font-size:x-large; 
+  background-color: lightgray; 
+  opacity: 60%; 
+  border: 5px darkgray;
+}
+
+.addTile:hover {
+  color: lightgray; 
+  background-color: gray; 
+}

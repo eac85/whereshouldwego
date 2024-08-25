@@ -1,0 +1,22 @@
+<p>admin works!</p>
+<div *ngIf="pendingPlaces$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
+
+<ul class="name-grid">
+    <li *ngFor="let place of placesData" [style.background-color]="place.color">
+        <i class="fas fa-edit edit-button"></i>
+        <div class="place-container">
+            <div class="place-details">
+                <span style="font-size: small; font-weight: bold;">{{ place.name | lowercase }}</span><br>
+                <span style="font-size: x-small; line-height: .2;">{{ place.neighborhood.name }}</span><br>
+                <span style="font-size: x-small; line-height: .2;">{{ place.outdoor }}</span><br>
+                <span style="font-size: x-small; line-height: .2;">{{ place.happy_hour }}</span><br>
+                <span style="font-size: x-small; line-height: .2;">{{ place.cuisine.name }}</span><br>
+                <span style="font-size: x-small; line-height: .2;">{{ place.dog_friendly }}</span><br>
+            </div>
+        </div>
+        <span style="bottom: 0; position: absolute; padding-bottom: 2px;" >
+            <i (click)="savePlace(place.id)" class="fa-solid fa-check"></i>
+            <i (click)="deletePlace(place.id)" class="fa-solid fa-trash" ></i> 
+        </span>
+    </li>
+  </ul>

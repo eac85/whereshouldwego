@@ -2,7 +2,7 @@ import { createClient, SupabaseClient, PostgrestResponse } from '@supabase/supab
 import { environment } from 'src/environments/environment'
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cuisine, Neighborhood } from '../types';
+import { Cuisine, Neighborhood, Place} from '../types';
 
 @Injectable({
     providedIn: 'root'
@@ -63,7 +63,8 @@ export class SupabaseService {
     async getNeighborhoods(): Promise<Neighborhood[]>{
         let {data, error } = await this.supabase
         .from('neighborhood')
-        .select(`id, name`);
+        .select(`id, name`)
+        .order('name', { ascending: true });
         if (error) {
             console.error('Error fetching neighborhoods:', error);
             return [];
@@ -73,11 +74,45 @@ export class SupabaseService {
     async getCuisine(): Promise<Cuisine[]>{
         let { data, error } = await this.supabase
         .from('cuisine')
-        .select(`id, name`);
+        .select(`id, name`)
+        .order('name', { ascending: true });
         if (error) {
             console.error('Error fetching cuisine:', error);
             return [];
         }
         return data as Cuisine[];
+    }
+
+    getPendingPlaces(): Observable<any> {
+      return new Observable(observer => {
+        this.supabase
+          .from('place')
+          .select(`
+          id,
+          outdoor_seating,
+          activity,
+          happy_hour,
+          color,
+          cuisine (id, name),
+          dog_friendly,
+          name, 
+          neighborhood (id, name) 
+         `).eq('status', 'P')
+         .order('name', { ascending: true })
+          .then((response: PostgrestResponse<any>) => {
+            if (response.error) {
+              observer.error(response.error.message);
+            } else {
+              observer.next(response.data);
+            }
+            observer.complete();
+          })
+      });
+    }
+
+    async updatePlace(id: number, status: string) {
+      const { data, error } = await this.supabase
+        .from('place')
+        .upsert({ id: id, status: status })
     }
 }

@@ -1,0 +1,45 @@
+.name-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the minmax for the desired width */
+    gap: 15px; /* Space between grid items */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.name-grid li {
+    border-radius: 5px;
+    overflow: hidden; /* Ensure content doesn't spill out */
+    padding: 10px;
+    position: relative;
+}
+
+.place-container {
+    position: relative;
+    padding: 10px;
+}
+
+.edit-button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    cursor: pointer;
+    font-size: 1rem; /* Adjust size as needed */
+    color: #333;
+}
+
+.place-details {
+    margin-bottom: 10px;
+}
+
+.action-icons {
+    text-align: center;
+    bottom: 0px;
+}
+
+.action-icons i {
+    cursor: pointer;
+    font-size: 1rem; /* Adjust size as needed */
+    color: #333;
+    position: absolute;
+}

@@ -1,0 +1,35 @@
+<h2> where should we go? </h2>  
+<span class="color-filter"> <i [style.color]="colorFilter ? 'salmon' : 'gray'"(click)="colorFilterToggle()" class="fa-solid fa-rainbow"></i> </span>
+
+<div class="container" style="width: 100%;">
+  <div class="row align-items-center">
+    <div class="col-md-12" style="text-align: center;font-size:20px;">
+    <mat-form-field class="chip-list" style="max-width: 400px; min-height: 130px; max-height: 130px; flex-wrap: nowrap;overflow-x:auto">
+      <mat-chip-grid #chipGrid>
+          <mat-chip *ngFor="let chip of chips" (removed)="removeChip(chip)">
+            {{ chip }}
+            <mat-icon matChipRemove (click)="removeChip(chip)"> <i  class="fas fa-times"></i></mat-icon>
+          </mat-chip>
+          <input #chipInput matInput [matAutocomplete]="auto" id="myInput" 
+          [matChipInputFor]="chipGrid" (keydown.enter)="addChip(chipInput.value); chipInput.value=''; filterPlaces()" (keydown.backspace)="removeLastChip()">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="addChip($event.option.viewValue); chipInput.value=''; filterPlaces()" style="font-size:30px;">
+            <mat-option *ngFor="let option of autocompleteOptions" [value]="option">{{ option }}</mat-option>
+          </mat-autocomplete>
+      </mat-chip-grid>
+    </mat-form-field>
+    <a style="padding-top: 10px" (click)="surpriseMe()"> <i  class="fas fa-dice"></i> </a>
+    </div>
+  </div>
+<div *ngIf="filteredPlacesData$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
+<ul class="name-grid">
+  <li *ngFor="let place of placesData" [style.background-color]="colorFilter ? place.color : 'white'">
+    <div>
+   <span style="font-size:small; font-weight: bold;">{{ place.name | lowercase }} </span> <br>
+   <span style="font-size:x-small; line-height: .2;">{{ place.neighborhood.name }} </span>
+  </div>
+  </li>
+  <li (click)="openModal()" class="addTile"> + </li>
+</ul>
+</div>
+</div>
+<app-modal></app-modal>

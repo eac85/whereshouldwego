@@ -9,13 +9,17 @@ import { AppComponent } from './app.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ModalComponent } from './modal/modal.component'; // Import MatAutocompleteModule
+import { ModalComponent } from './modal/modal.component';
+import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component'; 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ModalComponent
+    ModalComponent,
+    AdminComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
