@@ -22,6 +22,7 @@ export class HomeComponent {
   colorFilter: boolean = true;
   allPlacesData$: Observable<any>;
   filteredPlacesData$: Observable<any>;
+  selectedPlace: any = null;
 
   cuisines: Cuisine[] = [];
   cuisineNames: string[] = [];
@@ -184,5 +185,65 @@ export class HomeComponent {
 
   openModal() {
     this.modalService.showModal(this.chips);
+  }
+
+  openPlaceModal(event: MouseEvent, place: any) {
+    /*const tile = event.target as HTMLElement;
+    const rect = tile.getBoundingClientRect();
+    const middleX = rect.left + rect.width / 2;
+    const middleY = rect.top + rect.height / 2;
+
+
+    const modalWidth = 200; // Width of your modal content
+    const modalHeight = 200; // Height of your modal content (you might need to calculate this if dynamic)
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
+    const modalX = middleX + scrollX - modalWidth / 2;
+    const modalY = middleY + scrollY - modalHeight / 2;
+    
+    console.log("open place modal");
+    console.log(place);
+    this.selectedPlace = place;
+    this.modalService.showPlaceModal(true, place, { x: modalX, y: modalY });*/
+    const tile = event.target as HTMLElement;
+    const rect = tile.getBoundingClientRect();
+    const middleX = rect.left + rect.width / 2;
+    const middleY = rect.top + rect.height / 2;
+
+    const modalWidth = 200; // Width of your modal content
+    const modalHeight = 200; // Height of your modal content (you might need to calculate this if dynamic)
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+
+    let modalX = middleX + scrollX - modalWidth / 2;
+    let modalY = middleY + scrollY - modalHeight / 2;
+
+    // Get viewport dimensions
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    // Adjust position if the modal goes out of the viewport
+    if (modalX < 0) {
+      modalX = 0;
+    } else if (modalX + modalWidth > viewportWidth) {
+      modalX = viewportWidth - modalWidth;
+    }
+
+    if (modalY < 0) {
+        modalY = 0;
+    } else if (modalY + modalHeight > viewportHeight) {
+      modalY = viewportHeight - modalHeight;
+    }
+
+    console.log("open place modal");
+    console.log(place);
+    this.selectedPlace = place;
+    this.modalService.showPlaceModal(true, place, { x: modalX, y: modalY });
+
+  }
+  
+  closePlaceModal() {
+    this.selectedPlace = null;
   }
 }

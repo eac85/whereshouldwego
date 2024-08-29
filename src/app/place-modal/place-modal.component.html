@@ -1,0 +1,15 @@
+<p> hello </p>
+<div  class="modal"  *ngIf="isPlaceVisible">
+    <div [ngStyle]="{'top': position.y + 'px', 'left': position.x + 'px',  'position': 'absolute'}" class="modal-content" [style.background-color]="place.color">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <span [ngStyle]=" {'text-align': 'center'}">
+         <strong> {{place.name | lowercase }} </strong> <br>
+        {{place.neighborhood.name | lowercase }} <br>
+        <span *ngIf="place.cuisine && place.cuisine.name"> {{place.cuisine.name}}  <br> </span>
+        <span *ngIf="place.dog_friendly"> dog friendly <br> </span>
+        <span *ngIf="place.happy_hour">happy hour <br> </span>
+        <span *ngIf="place.outdoor_seating">outdoor seating <br> </span>
+        <span >{{position.x}} {{position.y}} <br> </span>
+    </span>
+    </div>
+  </div>

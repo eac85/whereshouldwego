@@ -11,7 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ModalComponent } from './modal/modal.component';
 import { AdminComponent } from './admin/admin.component';
-import { HomeComponent } from './home/home.component'; 
+import { HomeComponent } from './home/home.component';
+import { PlaceModalComponent } from './place-modal/place-modal.component'; 
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     ModalComponent,
     AdminComponent,
-    HomeComponent
+    HomeComponent,
+    PlaceModalComponent
   ],
   imports: [
     BrowserModule,

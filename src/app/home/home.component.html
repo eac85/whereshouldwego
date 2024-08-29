@@ -1,5 +1,5 @@
 <h2> where should we go? </h2>  
-<span class="color-filter"> <i [style.color]="colorFilter ? 'salmon' : 'gray'"(click)="colorFilterToggle()" class="fa-solid fa-rainbow"></i> </span>
+<span class="color-filter"> <!--<i class="fas fa-tools" ></i> --> <i [style.color]="colorFilter ? 'salmon' : 'gray'"(click)="colorFilterToggle()" class="fa-solid fa-rainbow"></i> </span>
 
 <div class="container" style="width: 100%;">
   <div class="row align-items-center">
@@ -22,7 +22,7 @@
   </div>
 <div *ngIf="filteredPlacesData$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
 <ul class="name-grid">
-  <li *ngFor="let place of placesData" [style.background-color]="colorFilter ? place.color : 'white'">
+  <li *ngFor="let place of placesData" [style.background-color]="colorFilter ? place.color : 'white'" (click)="openPlaceModal($event, place)">
     <div>
    <span style="font-size:small; font-weight: bold;">{{ place.name | lowercase }} </span> <br>
    <span style="font-size:x-small; line-height: .2;">{{ place.neighborhood.name }} </span>
@@ -33,3 +33,4 @@
 </div>
 </div>
 <app-modal></app-modal>
+<app-place-modal></app-place-modal>
