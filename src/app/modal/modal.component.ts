@@ -13,7 +13,8 @@ export interface Restaurant {
   color: string;
   dog_friendly: boolean | null;
   neighborhood_id: number;
-  cuisine_id: number;
+  cuisine_id: number | null;
+  id: number | null
 }
 
 
@@ -24,6 +25,8 @@ export interface Restaurant {
 })
 export class ModalComponent {
   @Input() isVisible = false;
+  @Input() place: any;
+
   neighborhoods: Neighborhood[] = [];
   cuisines: Cuisine[] = [];
 
@@ -36,14 +39,31 @@ export class ModalComponent {
     dog_friendly: null,
     neighborhood_id: 0,
     cuisine_id: 0,
+    id: null
     }
   
+    existing = false;
 
-  constructor(private modalService: ModalService, private readonly supabase: SupabaseService) {
-    this.modalService.modalVisibilityChange.subscribe(isVisible => {
-      this.isVisible = isVisible;
-    });
-  }
+    constructor(private modalService: ModalService, private readonly supabase: SupabaseService) {
+      this.modalService.modalVisibilityChange.subscribe(({ isVisible, place }) => {
+        this.isVisible = isVisible;
+        this.place = place;
+        if (place != null){
+          this.restaurant = {
+            name: this.place.name,
+            outdoor_seating: this.place.outdoor_seating ? this.place.outdoor_seating : null,
+            activity: this.place.activity ? this.place.activity : null,
+            happy_hour: this.place.happy_hour ? this.place.happy_hour : null,
+            color: this.place.color,
+            dog_friendly: this.place.dog_friendly ? this.place.dog_friendly : null,
+            neighborhood_id: this.place.neighborhood.id,
+            cuisine_id: this.place.cuisine ? this.place.cuisine.id : null,
+            id: place.id
+          }
+        }
+      });
+    }
+
 
   ngOnInit() {
     this.loadNeighborhoods();
@@ -71,9 +91,15 @@ export class ModalComponent {
   }
 
   onSubmit() {
-    // Handle form submission
-    console.log('Restaurant added:', this.restaurant);
-    this.supabase.savePlace(this.restaurant);
+    if(this.restaurant.id != 0){
+      console.log("this is an edit");
+      this.supabase.editPlace(this.restaurant);
+    }
+    else {
+      // Handle form submission
+      console.log('Restaurant added:', this.restaurant);
+      this.supabase.savePlace(this.restaurant);
+    }
     this.closeModal();
     this.clearForm();
   }
@@ -88,6 +114,7 @@ export class ModalComponent {
       dog_friendly: null,
       neighborhood_id: 0,
       cuisine_id: 0,
+      id: 0
     }
     this.restaurant = restaurant;
   }

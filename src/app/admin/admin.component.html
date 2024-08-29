@@ -1,7 +1,7 @@
-<p>admin works!</p>
+<h3> pending places </h3>
 <div *ngIf="pendingPlaces$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
 
-<ul class="name-grid">
+<ul class="name-grid" *ngIf="placesData.length > 0; else noPlaces">
     <li *ngFor="let place of placesData" [style.background-color]="place.color">
         <i class="fas fa-edit edit-button"></i>
         <div class="place-container">
@@ -20,3 +20,37 @@
         </span>
     </li>
   </ul>
+  </div>
+
+  <h3> pending edits</h3>
+  <div *ngIf="pendingEdits$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
+
+  <ul class="name-grid">
+    <li *ngFor="let place of placesData" [style.background-color]="place.color">
+        
+        <div class="place-container">
+            <div class="place-details">
+                <span style="font-size: small; font-weight: bold;">{{ place.name | lowercase }}</span><br>
+                <span *ngIf="place.neighborhood_id" style="font-size: x-small; line-height: .2;">{{ place.neighborhood_id.name }} <br> </span>
+                <span *ngIf="place.outdoor_seating" style="font-size: x-small; line-height: .2;"> outdoor seating <br> </span>
+                <span *ngIf="place.happy_hour" style="font-size: x-small; line-height: .2;"> happy hour <br> </span>
+                <span *ngIf="place.cuisine_id" style="font-size: x-small; line-height: .2;">{{ place.cuisine_id.name }} <br> </span>
+                <span *ngIf="place.dog_friendly" style="font-size: x-small; line-height: .2;"> dog friendly <br> </span>
+            </div>
+        </div>
+       
+    </li>
+  </ul>
+  </div>
+
+  <ng-template #noPlaces>
+    <div style="padding: 20px; text-align: center; line-height: .75;">
+      <p>no pending places found.</p>
+    </div>
+  </ng-template>
+
+  <ng-template #noEdits>
+    <div style="padding: 20px; text-align: center; line-height: .75;">
+      <p>no pending edits found.</p>
+    </div>
+  </ng-template>

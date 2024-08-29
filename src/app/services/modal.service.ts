@@ -9,11 +9,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ModalService {
-  private isVisible = new Subject<boolean>();
-  modalVisibilityChange = this.isVisible.asObservable();
-  //placeModalVisibilityChange = this.isPlaceVisible.asObservable();
 
-  //private placeModalVisibilitySource = new BehaviorSubject<{ isPlaceVisible: boolean, place: any }>({ isPlaceVisible: false, place: null, position: { x: number, y: number } });
+  private modalVisibilitySource = new BehaviorSubject<{ isVisible: boolean, place: any }>({
+    isVisible: false,
+    place: null,
+  });
+  modalVisibilityChange = this.modalVisibilitySource.asObservable();
+
   private placeModalVisibilitySource = new BehaviorSubject<{ isPlaceVisible: boolean, place: any, position: { x: number, y: number } }>({
     isPlaceVisible: false,
     place: null,
@@ -24,13 +26,16 @@ export class ModalService {
   chips: string[] = [];
   place: any;
 
-  showModal(chips: string[] = []) {
-    this.chips = chips;
-    this.isVisible.next(true);
+  showModal(place: any) {
+    console.log("helllllllo");
+    this.place = place;
+    console.log("modal service: " + place);
+    console.log(place);
+    this.modalVisibilitySource.next({ isVisible: true, place: place });
   }
 
   hideModal() {
-    this.isVisible.next(false);
+    this.modalVisibilitySource.next({ isVisible: false, place: null });
   }
 
   showPlaceModal(isPlaceVisible: boolean, place: any, position: { x: number, y: number }) {

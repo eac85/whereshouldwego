@@ -19,7 +19,11 @@ export class PlaceModalComponent {
         this.position = position;
       });
     }
-
+  
+  openModal(place: any) {
+       this.closeModal();
+       this.modalService.showModal(place);
+  }
 
   closeModal() {
     this.modalService.hidePlaceModal();

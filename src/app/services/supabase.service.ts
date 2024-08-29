@@ -30,6 +30,7 @@ export class SupabaseService {
           this.supabase
             .from('place')
             .select(`
+            id,
             outdoor_seating,
             activity,
             happy_hour,
@@ -59,6 +60,15 @@ export class SupabaseService {
           }
           return data;
     }
+
+    async Place(restaurant: any) {
+      restaurant.status = 'P';
+      const { data, error } = await this.supabase.from('place').insert([restaurant]);
+      if (error) {
+          throw error;
+        }
+        return data;
+  }
 
     async getNeighborhoods(): Promise<Neighborhood[]>{
         let {data, error } = await this.supabase
@@ -110,9 +120,49 @@ export class SupabaseService {
       });
     }
 
-    async updatePlace(id: number, status: string) {
+    getPendingEdits(): Observable<any> {
+      return new Observable(observer => {
+        this.supabase
+          .from('place_edit')
+          .select(`
+          id,
+          outdoor_seating,
+          happy_hour,
+          color,
+          cuisine_id (id, name),
+          dog_friendly,
+          name, 
+          neighborhood_id (id, name) 
+         `)
+         .order('name', { ascending: true })
+          .then((response: PostgrestResponse<any>) => {
+            if (response.error) {
+              observer.error(response.error.message);
+            } else {
+              observer.next(response.data);
+            }
+            observer.complete();
+          })
+      });
+    }
+
+    async updatePlaceStatus(id: number, status: string) {
       const { data, error } = await this.supabase
         .from('place')
         .upsert({ id: id, status: status })
+    }
+
+    async editPlace(restaurant: any) {
+      const { data, error } = await this.supabase
+        .from('place_edit')
+        .insert({ place_id: restaurant.id, 
+          outdoor_seating: restaurant.outdoor_seating,
+          happy_hour: restaurant.happy_hour,
+          color: restaurant.color,
+          cuisine_id: restaurant.cuisine_id, 
+          dog_friendly: restaurant.dog_friendly,
+          name: restaurant.name, 
+          neighborhood_id:  restaurant.neighborhood_id
+         })
     }
 }

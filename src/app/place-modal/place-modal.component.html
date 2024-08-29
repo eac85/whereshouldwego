@@ -1,6 +1,5 @@
 <div  class="modal"  *ngIf="isPlaceVisible">
-    <div [ngStyle]="{'top': position.y + 'px', 'left': position.x + 'px',  'position': 'absolute'}" class="modal-content" [style.background-color]="place.color">
-      <span class="close" (click)="closeModal()">&times;</span>
+    <div (mouseleave)="closeModal()"  (dblclick)="openModal(place)" [ngStyle]="{'top': position.y + 'px', 'left': position.x + 'px',  'position': 'absolute'}" class="modal-content" [style.background-color]="place.color">
       <span [ngStyle]=" {'text-align': 'center'}">
          <strong> {{place.name | lowercase }} </strong> <br>
         {{place.neighborhood.name | lowercase }} <br>

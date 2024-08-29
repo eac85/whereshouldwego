@@ -194,18 +194,13 @@ export class HomeComponent {
     const middleY = rect.top + rect.height / 2;
 
 
-    const modalWidth = 200; 
-    const modalHeight = 200; 
+    const modalWidth = 150; 
+    const modalHeight = 150; 
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
-
-    console.log(middleY);
-    console.log(window.scrollY);
     const modalX = middleX - modalWidth / 2;
     const modalY = (middleY + scrollY) - modalHeight / 2;
     
-    console.log("open place modal");
-    console.log(place);
     this.selectedPlace = place;
     this.modalService.showPlaceModal(true, place, { x: modalX, y: modalY });
 

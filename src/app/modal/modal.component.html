@@ -1,6 +1,6 @@
 <!-- modal.component.html -->
 <div class="modal" *ngIf="isVisible">
-    <div class="modal-content">
+    <div class="modal-content" [ngStyle]=" {'background-color': restaurant.color}">
       <span class="close" (click)="closeModal()">&times;</span>
       <h2>make a suggestion</h2>
       <form (ngSubmit)="onSubmit()">

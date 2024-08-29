@@ -16,8 +16,8 @@
   .modal-content {
     position: absolute; /* Absolute positioning relative to the modal container */
     padding: 20px; /* Padding inside the modal */
-    width: 200px; /* Width of the modal */
-    height: 200px;
+    width: 150px; /* Width of the modal */
+    height: 150px;
     max-width: 90%; /* Maximum width relative to viewport */
     border: none;
     border-radius: 10%;
