@@ -9,7 +9,7 @@
 
 .name-grid li {
     border-radius: 5px;
-    overflow: hidden; /* Ensure content doesn't spill out */
+    
     padding: 10px;
     position: relative;
 }

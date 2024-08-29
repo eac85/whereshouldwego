@@ -9,7 +9,7 @@
     left: 0;
     top: 0;
     transform: none;
-    
+    overflow: visible;
   }
   
   /* Modal Content */
