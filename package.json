@@ -19,7 +19,7 @@
     "@angular/material": "^16.2.14",
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
-    "@angular/router": "^0.0.1",
+    "@angular/router": "^14.3.0",
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@supabase/supabase-js": "^2.43.4",
     "ngx-chips": "^3.0.0",
