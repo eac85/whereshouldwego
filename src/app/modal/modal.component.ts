@@ -48,6 +48,11 @@ export class ModalComponent {
       this.modalService.modalVisibilityChange.subscribe(({ isVisible, place }) => {
         this.isVisible = isVisible;
         this.place = place;
+        console.log("modal com");
+        console.log(place);
+        if(place == null){
+          this.clearForm();
+        }
         if (place != null){
           this.restaurant = {
             name: this.place.name,

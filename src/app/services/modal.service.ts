@@ -27,10 +27,10 @@ export class ModalService {
   place: any;
 
   showModal(place: any) {
-    console.log("helllllllo");
     this.place = place;
-    console.log("modal service: " + place);
-    console.log(place);
+    if(place.id == null){
+      place.name = null;
+    }
     this.modalVisibilitySource.next({ isVisible: true, place: place });
   }
 

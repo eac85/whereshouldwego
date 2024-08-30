@@ -21,7 +21,7 @@
   </div>
 <div *ngIf="filteredPlacesData$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
 <ul class="name-grid">
-  <li *ngFor="let place of placesData" [style.background-color]="colorFilter ? place.color : 'white'" (mouseenter)="openPlaceModal($event, place)" 
+  <li *ngFor="let place of placesData" [style.background-color]="colorFilter ? place.color : 'white'" [style.box-shadow]="'0 4px 8px rgba(0, 0, 0, 0.2)'" (mouseenter)="openPlaceModal($event, place)" 
   (mouseleave)="closePlaceModal()" (click)="openPlaceModal($event, place)" (dblclick)="openModal()">
     <div>
    <span style="font-size:small; font-weight: bold;">{{ place.name | lowercase }} </span> <br>
