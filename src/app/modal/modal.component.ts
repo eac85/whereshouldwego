@@ -48,14 +48,12 @@ export class ModalComponent {
       this.modalService.modalVisibilityChange.subscribe(({ isVisible, place }) => {
         this.isVisible = isVisible;
         this.place = place;
-        console.log("modal com");
-        console.log(place);
         if(place == null){
           this.clearForm();
         }
         if (place != null){
           this.restaurant = {
-            name: this.place.name,
+            name: this.place.name.toLowerCase(),
             outdoor_seating: this.place.outdoor_seating ? this.place.outdoor_seating : null,
             activity: this.place.activity ? this.place.activity : null,
             happy_hour: this.place.happy_hour ? this.place.happy_hour : null,
@@ -123,4 +121,41 @@ export class ModalComponent {
     }
     this.restaurant = restaurant;
   }
+
+   hexToRGB(hex:string, alpha: number) {
+    var r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    } else {
+        return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+  }
+
+  getCuisineName(id: number) {
+    const item = this.cuisines.find(item => item.id === id);
+    return item ? item.name : undefined;
+  }
+
+  getNeighborhoodName(id: number) {
+    const item = this.neighborhoods.find(item => item.id === id);
+    return item ? item.name : undefined;
+  }
+
+  textContent: string = 'Click to edit this text';
+
+  // Method to make the text editable
+  makeEditable(element: HTMLElement) {
+    element.setAttribute('contenteditable', 'true');
+    element.focus(); // Focus on the element so the user can start typing
+  }
+
+  // Method to save the edited text when the element loses focus
+  saveText(element: HTMLElement) {
+    element.setAttribute('contenteditable', 'false');
+    this.textContent = element.innerText; // Update the textContent property
+  }
+
 }

@@ -28,8 +28,8 @@ export class ModalService {
 
   showModal(place: any) {
     this.place = place;
-    if(place.id == null){
-      place.name = null;
+    if(place == null){
+      //place.name = null;
     }
     this.modalVisibilitySource.next({ isVisible: true, place: place });
   }

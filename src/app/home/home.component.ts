@@ -183,8 +183,8 @@ export class HomeComponent {
     alert(this.chips);
   }
 
-  openModal() {
-    this.modalService.showModal(this.chips);
+  openModal(restaurant:any) {
+    this.modalService.showModal(restaurant);
   }
 
   openPlaceModal(event: MouseEvent, place: any) {

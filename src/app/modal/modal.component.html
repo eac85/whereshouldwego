@@ -1,46 +1,68 @@
 <!-- modal.component.html -->
 <div class="modal" *ngIf="isVisible">
-    <div class="modal-content" [ngStyle]=" {'background-color': 'whitesmoke', 'opacity': '0.95', 
+    <div class="modal-content" [ngStyle]=" {'background-color': hexToRGB(restaurant.color, .8),  
       'border-color': restaurant.color, 'border-width': '20px', 'border-style':'solid'}">
       <span class="close" (click)="closeModal()">&times;</span>
+      <div *ngIf=restaurant.id class="restaurantCard">  
+        <img class="hover-flip" src="../../assets/img/Asset 175.png" alt="Girl in a jacket" width="25">
+
+        <span [ngStyle]="{'font-size': '40px', 'font-weight': 'bold'}"> {{ restaurant.name }}
+          <img class="hover-bounce" src="../../assets/img/Asset 171.png" alt="Girl in a jacket" width="25"> <br>  </span>
+
+        <span [ngStyle]="{'font-size': '20px'}"> {{ getNeighborhoodName(restaurant.neighborhood_id) }}   
+          <span *ngIf=restaurant.cuisine_id > ||  {{ restaurant.cuisine_id ? getCuisineName(restaurant.cuisine_id) : '' }} <br> </span>
+        </span> 
+
+
+        <span  *ngIf=restaurant.outdoor_seating [ngStyle]="{'font-size': '20px'}"> || outdoor seating  </span>
+
+        <span  *ngIf=restaurant.happy_hour [ngStyle]="{'font-size': '20px'}"> || happy hour <br></span> 
+
+
+
+        <input [ngStyle]=" {'background-color': 'whitesmoke', 'width': '100%', 'visibility':'hidden'} "type="submit" value="submit">
+
+      </div>
+      <div *ngIf=!restaurant.id>
       <h2>make a suggestion</h2>
       <form (ngSubmit)="onSubmit()">
         <label for="name">name:</label>
         <input type="text" id="name" name="name" [(ngModel)]="restaurant.name" required>
   
-        <label for="neighborhood">neighborhood:</label>
           <select id="neighborhood" [(ngModel)]="restaurant.neighborhood_id" name="existing-restaurant" required>
             <option *ngFor="let neighborhood of neighborhoods" [value]=neighborhood.id>{{ neighborhood.name }}</option>
           </select>
   
-        <label for="cuisine">cuisine:</label>
             <select id="cuisine" [(ngModel)]="restaurant.cuisine_id" name="cuisine" required>
               <option *ngFor="let cuisine of cuisines" [value]=cuisine.id>{{ cuisine.name }}</option>
             </select>
       
-        <label for="color">color:</label>
-        <input type="color" id="color" name="color" [(ngModel)]="restaurant.color" required>
-
-        <div class="chips-group">
+         <span [ngStyle]="{'display':'flex', 'gap':'20px'}">
+            <label for="color">color:</label>
+            <input type="color" id="color" name="color" [(ngModel)]="restaurant.color" required>
+        </span>
+        
+        <div  class="chips-group">
             <div class="chips-item">
-              <label>dog friendly:</label>
               <div class="chips">
+                <label>dog friendly:</label>
                 <div class="chip" [class.selected]="restaurant.dog_friendly === true" (click)="restaurant.dog_friendly = true">yes</div>
                 <div class="chip" [class.selected]="restaurant.dog_friendly === false" (click)="restaurant.dog_friendly = false">no</div>
                 <div class="chip" [class.selected]="restaurant.dog_friendly === null" (click)="restaurant.dog_friendly = null">unsure</div>
               </div>
             </div>
+          
             <div class="chips-item">
-              <label>outdoor seating:</label>
               <div class="chips">
+                <label>outdoor seating:</label>
                 <div class="chip" [class.selected]="restaurant.outdoor_seating === true" (click)="restaurant.outdoor_seating = true">yes</div>
                 <div class="chip" [class.selected]="restaurant.outdoor_seating === false" (click)="restaurant.outdoor_seating = false">no</div>
                 <div class="chip" [class.selected]="restaurant.outdoor_seating === null" (click)="restaurant.outdoor_seating = null">unsure</div>
               </div>
             </div>
             <div class="chips-item">
-                <label>happy hour:</label>
                 <div class="chips">
+                  <label>happy hour:</label>
                   <div class="chip" [class.selected]="restaurant.happy_hour === true" (click)="restaurant.happy_hour = true">yes</div>
                   <div class="chip" [class.selected]="restaurant.happy_hour === false" (click)="restaurant.happy_hour = false">no</div>
                   <div class="chip" [class.selected]="restaurant.happy_hour === null" (click)="restaurant.happy_hour = null">unsure</div>
@@ -48,8 +70,9 @@
               </div>
           </div>
   
-        <input [ngStyle]=" {'background-color': restaurant.color} "type="submit" value="submit">
+        <input [ngStyle]=" {'background-color': 'whitesmoke'} "type="submit" value="submit">
       </form>
+      </div>
     </div>
   </div>
   
