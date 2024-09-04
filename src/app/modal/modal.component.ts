@@ -100,6 +100,7 @@ export class ModalComponent {
     }
     else {
       // Handle form submission
+      this.restaurant.id = null;
       console.log('Restaurant added:', this.restaurant);
       this.supabase.savePlace(this.restaurant);
     }
