@@ -6,17 +6,17 @@
       <div *ngIf=restaurant.id class="restaurantCard">  
         <img class="hover-flip" src="../../assets/img/Asset 175.png" alt="Girl in a jacket" width="25">
 
-        <span [ngStyle]="{'font-size': '40px', 'font-weight': 'bold'}"> {{ restaurant.name }}
+        <span [ngStyle]="{'font-size': '5vw', 'font-weight': 'bold'}"> {{ restaurant.name }}
           <img class="hover-bounce" src="../../assets/img/Asset 171.png" alt="Girl in a jacket" width="25"> <br>  </span>
 
-        <span [ngStyle]="{'font-size': '20px'}"> {{ getNeighborhoodName(restaurant.neighborhood_id) }}   
+        <span [ngStyle]="{'font-size': '3vw'}"> {{ getNeighborhoodName(restaurant.neighborhood_id) }}   
           <span *ngIf=restaurant.cuisine_id > ||  {{ restaurant.cuisine_id ? getCuisineName(restaurant.cuisine_id) : '' }} <br> </span>
         </span> 
 
 
-        <span  *ngIf=restaurant.outdoor_seating [ngStyle]="{'font-size': '20px'}"> || outdoor seating  </span>
+        <span  *ngIf=restaurant.outdoor_seating [ngStyle]="{'font-size': '3vw'}"> || outdoor seating  </span>
 
-        <span  *ngIf=restaurant.happy_hour [ngStyle]="{'font-size': '20px'}"> || happy hour <br></span> 
+        <span  *ngIf=restaurant.happy_hour [ngStyle]="{'font-size': '3vw'}"> || happy hour <br></span> 
 
 
 

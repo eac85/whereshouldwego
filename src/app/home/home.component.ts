@@ -23,6 +23,7 @@ export class HomeComponent {
   allPlacesData$: Observable<any>;
   filteredPlacesData$: Observable<any>;
   selectedPlace: any = null;
+  isFilterVisible=false;
 
   cuisines: Cuisine[] = [];
   cuisineNames: string[] = [];
@@ -208,5 +209,11 @@ export class HomeComponent {
   
   closePlaceModal() {
     this.selectedPlace = null;
+  }
+
+  showFilter() {
+    console.log("helllllo");
+    console.log(this.isFilterVisible);
+    this.isFilterVisible = !this.isFilterVisible;
   }
 }

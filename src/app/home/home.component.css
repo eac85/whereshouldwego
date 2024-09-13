@@ -1,6 +1,24 @@
+.header-filter {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  z-index: 1000; /* Ensure it stays above other elements */
+  background-color: whitesmoke;
+}
+
+
+.header-2 {
+  font-size: 1em;
+  top: 40px; /* Adjust this based on the height of header-1 */
+}
 body {
     background-color: #F5EDDC;
+    overflow-y: auto;
 }
+
 
 .chip-list {
     width: 100%;
