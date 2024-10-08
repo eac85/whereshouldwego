@@ -4,7 +4,7 @@
     top: 0;
     left: 0;
     text-align: center;
-    z-index: 3000;
+    z-index: 1000;
   }
 
    
@@ -14,9 +14,14 @@
     width: 0; /* Start with zero width */
     overflow: hidden; /* Hide overflow to enable transition */
     transition: width 0.75s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy effect */
-    background-color: #f1f1f1; /* Background color */
     border-radius: 5px; /* Rounded corners */
     margin-left: 10px; /* Space between button and form */
+   
+  }
+
+  .formform {
+    position: absolute;
+    left: 2em;
   }
   
   /* When the 'show' class is added, expand the form */

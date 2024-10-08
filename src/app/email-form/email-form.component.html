@@ -1,5 +1,6 @@
 <div class="header">
-    <i *ngIf="!showEmailForm" (click)="toggleEmailForm()" class="email-icon fa fa-envelope" aria-hidden="true"></i>
+    <i (click)="toggleEmailForm()" class="email-icon fa fa-envelope" aria-hidden="true"></i>
+    <span class="formform">
     <div [ngClass]="{'show': showEmailForm}" class="email-form">
       <form (ngSubmit)="onSubmit()" [formGroup]="emailForm">
         <input
@@ -14,5 +15,6 @@
         <button type="submit"  class="subscribe-button" [disabled]="emailForm.invalid">  <i  class="fa-solid fa-arrow-right"></i></button>
       </form>
     </div>
+   </span>
   </div>
   

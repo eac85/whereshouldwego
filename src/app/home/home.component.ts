@@ -228,21 +228,7 @@ export class HomeComponent {
   }
 
   showFilter() {
-    console.log("helllllo");
-    console.log(this.isFilterVisible);
     this.isFilterVisible = !this.isFilterVisible;
-  }
-
-  onSubmit() {
-    if (this.emailForm.valid) {
-      console.log('Email submitted:', this.emailForm.value.email);
-      this.supabase.saveEmail( this.emailForm.value.email);
-      // Handle subscription logic here (e.g., sending the email to a backend API)
-    }
-  }
-
-  toggleEmailForm() {
-    this.showEmailForm = !this.showEmailForm;
   }
 
 }
