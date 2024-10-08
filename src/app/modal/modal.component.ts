@@ -93,19 +93,25 @@ export class ModalComponent {
     this.modalService.hideModal();
   }
 
-  onSubmit() {
-    if(this.restaurant.id != 0){
-      console.log("this is an edit");
-      this.supabase.editPlace(this.restaurant);
+  async onSubmit() {
+    try {
+      if (this.restaurant.id != 0) {
+        console.log("this is an edit");
+        await this.supabase.editPlace(this.restaurant);
+      } else {
+        // Handle form submission for new place
+        this.restaurant.id = null;
+        console.log('Restaurant added:', this.restaurant);
+        await this.supabase.savePlace(this.restaurant);  // Ensure that you wait for the promise
+      }
+      // Only close the modal and clear the form if there were no errors
+      this.closeModal();
+      this.clearForm();
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      // Optionally display an error message in the UI
+      alert("There was an error while saving the restaurant. Please try again.");
     }
-    else {
-      // Handle form submission
-      this.restaurant.id = null;
-      console.log('Restaurant added:', this.restaurant);
-      this.supabase.savePlace(this.restaurant);
-    }
-    this.closeModal();
-    this.clearForm();
   }
 
   clearForm() {

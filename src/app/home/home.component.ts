@@ -31,30 +31,45 @@ export class HomeComponent {
   neighborhoods: Neighborhood[] = [];
   neighborhoodNames: string[] = [];
 
-  autocompleteOptions: string[] = [];
+   autocompleteOptions: string[] = [];
 
-   constructor(private readonly supabase: SupabaseService, private modalService: ModalService) {
+  constructor(private readonly supabase: SupabaseService, private modalService: ModalService) {
     this.filteredPlaces = [...placesInPhiladelphia]; // Copy all places to filteredPlaces initially
     this.allPlacesData$ = this.supabase.getPlaces1();
     this.filteredPlacesData$ = this.filterPlaces();
-    this.cuisineHandler();
-    this.neighborhoodHandler();
+    this.initializeAutocompleteOptions();
   }
+
+  async initializeAutocompleteOptions() {
+    await Promise.all([this.cuisineHandler(), this.neighborhoodHandler()]); // Ensure both handlers complete
+
+    // Combine cuisine and neighborhood names for autocomplete options
+    this.autocompleteOptions = [
+        'activity', 
+        ...this.cuisineNames,  // Include cuisine names
+        'outside',
+        'happy hour',
+        'dog friendly',
+        ...this.neighborhoodNames // Include neighborhood names
+    ];
+}
 
   async cuisineHandler() {
     this.cuisines = await this.supabase.getCuisine();
-    this.cuisineNames = this.cuisines.map(cuisine => cuisine.name);
+    this.cuisineNames =  this.cuisines.map(cuisine => cuisine.name);
+    console.log("Cuisine Names:", this.cuisineNames); // Check the data
+    this.autocompleteOptions =  [
+      ...this.cuisineNames,
+     ];
   }
 
   async neighborhoodHandler() {
     this.neighborhoods = await this.supabase.getNeighborhoods();
-    this.neighborhoodNames = this.neighborhoods.map(neighborhood => neighborhood.name);
-    this.autocompleteOptions = await ['activity',
-    'outside',
-    'happy hour',
-    'dog friendly',
+    this.neighborhoodNames =  this.neighborhoods.map(neighborhood => neighborhood.name);
+    console.log("neighborhood Names:", this.neighborhoodNames); // Check the data
+    this.autocompleteOptions =  [
     ...this.neighborhoodNames,
-    ...this.cuisineNames];
+   ];
   }
 
   chipInput = new FormControl();
@@ -131,19 +146,15 @@ export class HomeComponent {
     const location = this.chips.find(chip =>
       ['outside', 'inside'].includes(chip.toLowerCase())
     );
-    const hasCuisine = this.chips.find(chip => [
-      "french", "pizza", "american", "vietnamese", "board game cafe", "mexican",
-      "japanese", "cocktails", "seafood", "diner", "asian", "wine & cheese",
-      "korean", "new american", "whiskey bar", "italian", "bar & grill",
-      "malaysian", "spanish", "thai", "cuban", "chinese", "middle eastern"
-    ].includes(chip.toLowerCase()));
-
-    const selectedNeighborhood = this.chips.find(chip =>
-      ['queen village', 'west philadelphia', 'bella vista', 'south philly', 'fairmount', 'fishtown', 'northern liberties',
-        'university city', 'washington square west', 'center city', 'chinatown', 'center city', 'old city', 'east passyunk', 'chinatown',
-        'south philadelphia', 'society hill', 'graduate hospital', 'rittenhouse', 'south street', 'logan square'
-      ].includes(chip.toLowerCase())
+   
+    const hasCuisine = this.chips.find(chip => 
+      this.cuisineNames.map(cuisine => cuisine.toLowerCase()).includes(chip.toLowerCase())
     );
+
+    const selectedNeighborhood = this.chips.find(chip => 
+      this.neighborhoodNames.map(neighborhood => neighborhood.toLowerCase()).includes(chip.toLowerCase())
+    );
+
     return of(places.filter(place => {
       // Check if the place meets all tag criteria
       const meetsCriteria =

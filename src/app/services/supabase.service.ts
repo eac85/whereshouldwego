@@ -54,6 +54,8 @@ export class SupabaseService {
 
     async savePlace(restaurant: any) {
         restaurant.status = 'P';
+        delete restaurant.id;
+        console.log(restaurant);
         const { data, error } = await this.supabase.from('place').insert([restaurant]);
         if (error) {
             throw error;
