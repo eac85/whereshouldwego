@@ -167,4 +167,14 @@ export class SupabaseService {
           neighborhood_id:  restaurant.neighborhood_id
          })
     }
+
+    async saveEmail(email: string) {
+      console.log(email);
+      const { data, error } = await this.supabase.from('email')
+        .insert({ email_address: email });
+      if (error) {
+          throw error;
+        }
+        return data;
+  }
 }

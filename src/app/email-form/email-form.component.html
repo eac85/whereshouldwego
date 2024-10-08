@@ -1,0 +1,18 @@
+<div class="header">
+    <i *ngIf="!showEmailForm" (click)="toggleEmailForm()" class="email-icon fa fa-envelope" aria-hidden="true"></i>
+    <div [ngClass]="{'show': showEmailForm}" class="email-form">
+      <form (ngSubmit)="onSubmit()" [formGroup]="emailForm">
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          placeholder="email please!"
+          class="email-input"
+          required
+        />
+      
+        <button type="submit"  class="subscribe-button" [disabled]="emailForm.invalid">  <i  class="fa-solid fa-arrow-right"></i></button>
+      </form>
+    </div>
+  </div>
+  

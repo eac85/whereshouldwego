@@ -6,6 +6,7 @@ import { SupabaseService } from '../services/supabase.service';
 import { Observable, of } from 'rxjs';
 import { filter, map , switchMap } from 'rxjs/operators';
 import { ModalService } from '../services/modal.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class HomeComponent {
   filteredPlacesData$: Observable<any>;
   selectedPlace: any = null;
   isFilterVisible=false;
-
+  emailForm: FormGroup;
+  showEmailForm = false; // Controls form visibility
   cuisines: Cuisine[] = [];
   cuisineNames: string[] = [];
 
@@ -33,11 +35,14 @@ export class HomeComponent {
 
    autocompleteOptions: string[] = [];
 
-  constructor(private readonly supabase: SupabaseService, private modalService: ModalService) {
+  constructor(private readonly supabase: SupabaseService, private modalService: ModalService, private fb: FormBuilder) {
     this.filteredPlaces = [...placesInPhiladelphia]; // Copy all places to filteredPlaces initially
     this.allPlacesData$ = this.supabase.getPlaces1();
     this.filteredPlacesData$ = this.filterPlaces();
     this.initializeAutocompleteOptions();
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
   }
 
   async initializeAutocompleteOptions() {
@@ -227,4 +232,17 @@ export class HomeComponent {
     console.log(this.isFilterVisible);
     this.isFilterVisible = !this.isFilterVisible;
   }
+
+  onSubmit() {
+    if (this.emailForm.valid) {
+      console.log('Email submitted:', this.emailForm.value.email);
+      this.supabase.saveEmail( this.emailForm.value.email);
+      // Handle subscription logic here (e.g., sending the email to a backend API)
+    }
+  }
+
+  toggleEmailForm() {
+    this.showEmailForm = !this.showEmailForm;
+  }
+
 }

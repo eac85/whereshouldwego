@@ -1,0 +1,80 @@
+
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    z-index: 3000;
+  }
+
+   
+  /* Initially hide the form */
+  .email-form {
+    display: inline-block; /* Use inline-block for horizontal layout */
+    width: 0; /* Start with zero width */
+    overflow: hidden; /* Hide overflow to enable transition */
+    transition: width 0.75s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy effect */
+    background-color: #f1f1f1; /* Background color */
+    border-radius: 5px; /* Rounded corners */
+    margin-left: 10px; /* Space between button and form */
+  }
+  
+  /* When the 'show' class is added, expand the form */
+  .email-form.show {
+    width: 100%; /* Set the width you want when open */
+  }
+  
+  .email-form form {
+    display: flex; /* Align items horizontally */
+  }
+  
+  .email-form input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex: 1; /* Allow input to take available space */
+  }
+  
+  .email-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 3em;
+  }
+  
+  .email-form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .email-icon {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    color: black;
+    transition: width 0.75s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy effect */
+  }
+
+  .email-input {
+    padding: 8px; /* Add padding for the input */
+    margin-bottom: 10px; /* Space between input and button */
+    border: 1px solid #ccc; /* Border style */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+  }
+  
+  .subscribe-button {
+    padding: 8px; /* Add padding for the button */
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    font-size: 14px; /* Font size */
+  }
+  
+  
+  

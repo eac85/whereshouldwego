@@ -12,7 +12,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ModalComponent } from './modal/modal.component';
 import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
-import { PlaceModalComponent } from './place-modal/place-modal.component'; 
+import { PlaceModalComponent } from './place-modal/place-modal.component';
+import { EmailFormComponent } from './email-form/email-form.component'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { PlaceModalComponent } from './place-modal/place-modal.component';
     ModalComponent,
     AdminComponent,
     HomeComponent,
-    PlaceModalComponent
+    PlaceModalComponent,
+    EmailFormComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { PlaceModalComponent } from './place-modal/place-modal.component';
     FormsModule,
     MatChipsModule,
     BrowserAnimationsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
