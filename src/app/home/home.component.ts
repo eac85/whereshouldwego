@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { TagItem, Item, Place, Neighborhood, Cuisine } from '../types';
 import { FormControl } from '@angular/forms';
 import { placesInPhiladelphia } from '../places';
@@ -231,4 +231,61 @@ export class HomeComponent {
     this.isFilterVisible = !this.isFilterVisible;
   }
 
+  selectedPlace1: any = null;
+
+toggleExpand(place: any) {
+  this.selectedPlace1 = this.selectedPlace1 === place ? null : place;
+}
+
+listOfPlaces: any[] = [];
+
+  addToList(place: any, event: MouseEvent) {
+    // Prevent the click from collapsing the item by stopping event propagation
+    event.stopPropagation();
+  
+    // Add the selected place to the list
+    this.listOfPlaces.push(place);
+    
+    console.log('Added to list:', this.listOfPlaces);
+  }
+
+
+  removeFromList(place: any, event: MouseEvent) {
+    // Prevent the click from collapsing the item by stopping event propagation
+    event.stopPropagation();
+  
+    this.listOfPlaces = this.listOfPlaces.filter(p => p !== place);
+    
+    console.log('Removed from list:', this.listOfPlaces);
+  }
+
+  isInList(place: any): boolean {
+    return this.listOfPlaces.includes(place);
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    const clickedInside = (event.target as HTMLElement).closest('li.expanded');
+    if (!clickedInside) {
+      // Collapse the expanded item if clicked outside
+      this.selectedPlace1 = null;
+    }
+  }
+
+  sendText(){
+    if (this.listOfPlaces.length > 0) {
+      const placesString = this.listOfPlaces.map(place => place.name).join(', ');
+      const message = `Hey, I was thinking we could go to ${placesString.toLowerCase()}. What do you think?`;
+
+      // Use the sms scheme or mailto scheme for sending a message
+      const encodedMessage = encodeURIComponent(message);
+      const phoneNumber = ''; // Replace with your phone number
+      const smsUrl = `sms:${phoneNumber}?&body=${encodedMessage}`;
+
+      // Open the user's messaging app with the message pre-filled
+      window.open(smsUrl);
+    } else {
+      console.log('No places in the list to send.');
+    }
+  }
 }

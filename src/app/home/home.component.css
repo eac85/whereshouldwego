@@ -145,3 +145,62 @@ body {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly increase shadow on hover */
 }
 
+
+li {
+  background-color: white;
+  padding: 10px;
+  transition: all 0.3s ease-in-out;  /* Smooth expansion */
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+li.expanded {
+  grid-column: span 2;  /* Expands to span two columns */
+  grid-row: span 2;     /* Expands to span two rows */
+  background-color: lightblue; /* Optional: change color when expanded */
+  padding: 20px;
+  transition: all 0.5s ease-in-out;  /* Smooth transition for expansion */
+}
+
+li.in-list {
+  border: 2px solid black;  /* Dark border for items in the list */
+}
+
+.add-to-list-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: rgb(86, 133, 253);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1em;
+  cursor: pointer;
+  visibility: hidden;  /* Hidden until expanded */
+}
+
+li.expanded .add-to-list-btn {
+  visibility: visible;  /* Show button when expanded */
+}
+
+li.expanded .rmv-from-list-btn {
+  visibility: visible;  /* Show button when expanded */
+}
+
+.rmv-from-list-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: rgb(14, 2, 1);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2em;
+  cursor: pointer;
+  visibility: hidden;  /* Hidden until expanded */
+}

@@ -1,5 +1,6 @@
 <div class="header-filter header-2" [ngStyle]="{'text-align':'center', 'padding':'1em'}"> 
   <button (click)="showFilter()"> <i  class="fa-solid fa-filter"></i>  filters</button>
+  <button (click)="sendText()"> <i  class="fa-solid fa-message"></i>  send text</button>
 </div> 
 <div class="container" style="width: 100%;overflow: unset;">
   <div [ngClass]="{'filter-visible': isFilterVisible, 'filter-hidden': !isFilterVisible}"  class="row align-items-center filter-container">
@@ -20,18 +21,30 @@
     <a style="padding-top: 10px" (click)="surpriseMe()"> <i  class="fas fa-dice"></i> </a>
     </div>
   </div> 
-<div *ngIf="filteredPlacesData$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
-  <ul class="name-grid">
-    <li *ngFor="let place of placesData" [style.background-color]="colorFilter ? place.color : 'white'" 
-        [style.box-shadow]="'0 4px 8px rgba(0, 0, 0, 0.2)'" (click)="openModal(place)"class="fade-in">
-      <div>
-        <span style="font-size: small; font-weight: bold;">{{ place.name | lowercase }} </span> <br>
-        <span style="font-size: x-small; line-height: .2;">{{ place.neighborhood.name }} </span>
-      </div>
-    </li>
-    <li (click)="openModal(null)" class="addTile fade-in"> + </li>
-  </ul>
-</div>
+  <div *ngIf="filteredPlacesData$ | async as placesData" style="padding-top: 20px; text-align: center; line-height: .75;">
+    <ul class="name-grid">
+      <li *ngFor="let place of placesData" 
+          [style.background-color]="colorFilter ? place.color : 'white'" 
+          [style.box-shadow]="'0 4px 8px rgba(0, 0, 0, 0.2)'" 
+          [ngClass]="{'expanded': selectedPlace1 === place, 'in-list': isInList(place)}" 
+          (click)="toggleExpand(place)" 
+          class="fade-in">
+        <div>
+          <span style="font-size: small; font-weight: bold;">{{ place.name | lowercase }} </span> <br>
+          <span style="font-size: x-small; line-height: .2;">{{ place.neighborhood.name }} </span> <br>
+          <button *ngIf="selectedPlace1 === place &&  !isInList(place)" class="add-to-list-btn" (click)="addToList(place, $event)">
+            +
+          </button>
+          <button *ngIf="selectedPlace1 === place &&  isInList(place)" class="rmv-from-list-btn" (click)="removeFromList(place, $event)">
+            -
+          </button>
+        </div>
+      </li>
+      <li (click)="openModal(null)" class="addTile fade-in"> + </li>
+    </ul>
+  </div>
+  
+  
 </div>
 <app-modal></app-modal>
 <app-place-modal></app-place-modal>
